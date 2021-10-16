@@ -1,8 +1,8 @@
 local lsp_installer = require("nvim-lsp-installer")
 local nvim_lsp = require('lspconfig')
 
-vim.cmd [[autocmd ColorScheme * highlight NormalFloat guibg=none]]
-vim.cmd [[autocmd ColorScheme * highlight FloatBorder guifg=white guibg=none]]
+vim.cmd [[autocmd ColorScheme * highlight NormalFloat guibg=#282828]]
+vim.cmd [[autocmd ColorScheme * highlight FloatBorder guifg=white guibg=#282828]]
 
 local border = {
   {"╭", "FloatBorder"},
