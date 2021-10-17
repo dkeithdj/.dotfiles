@@ -14,8 +14,8 @@ map('n', '<leader>p', '"+p<CR>',{ noremap = true, silent = true })
 -- Y yank until the end of line  (note: this is now a default on master)
 map('n', 'Y', 'y$', { noremap = true })
 
--- Access terminal
 map('n', '<leader>y', '"+y<CR>', { noremap = true, silent = true })
+map('v', '<leader>y', '"+y<CR>', { noremap = true, silent = true })
 map('n', '<leader>Y', 'gg"+yG"<CR>',{ noremap = true, silent = true })
 
 --terminal settings

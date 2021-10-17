@@ -16,7 +16,7 @@ vim.o.hidden = true
 vim.o.mouse = 'a'
 
 -- Don't show mode
-vim.g.showmode = false
+vim.cmd[[ set noshowmode ]]
 
 --Enable break indent
 vim.o.breakindent = true
@@ -31,7 +31,7 @@ vim.o.ignorecase = true
 vim.o.smartcase = true
 
 -- let cmd height be 2 lines
-vim.o.cmdheight = 2
+-- vim.o.cmdheight = 2
 
 vim.o.tabstop = 2
 vim.o.softtabstop = 2

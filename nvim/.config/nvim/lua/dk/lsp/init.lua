@@ -66,7 +66,7 @@ lsp_installer.on_server_ready(function(server)
 end)
 
 -- Enable the following language servers
-local servers = {'pyright', 'tsserver', 'vimls', 'cssls', 'html'}
+local servers = {'pyright', 'tsserver', 'vimls', 'cssls', 'html', 'bashls'}
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {
     on_attach = on_attach,

@@ -1,6 +1,7 @@
 #!/bin/sh
 export ZDOTDIR=$HOME/.config/zsh
-HISTFILE=~/.zsh_history
+HISTFILE=~/.cache/zsh/.zsh_history
+source $HOME/.zprofile
 setopt appendhistory
 
 # some useful options (man zshoptions)
@@ -42,12 +43,13 @@ zsh_add_file "zsh-prompt"
 zsh_add_plugin "zsh-users/zsh-autosuggestions"
 # zsh_add_plugin "zsh-users/zsh-syntax-highlighting"
 zsh_add_plugin "hlissner/zsh-autopair"
+# zsh_add_plugin "zdharma/fast-syntax-highlighting"
 
 # Key-bindings
-# bindkey -s '^n' 'nvim $(fzf)^M'
+# bindkey -s '^t' 'nvim $(fzf)^M'
 # bindkey -s '^v' 'nvim\n'
 
-bindkey -s "^f" "~/tmux-sessionizer^M"
+bindkey -s '^f' 'tmux-sessionizer^M'
 bindkey "^p" up-line-or-beginning-search # Up
 bindkey "^n" down-line-or-beginning-search # Down
 bindkey "^k" up-line-or-beginning-search # Up
@@ -55,27 +57,38 @@ bindkey "^j" down-line-or-beginning-search # Down
 bindkey -r "^u"
 bindkey -r "^d"
 
-# FZF 
-# TODO update for mac
-[ -f /usr/share/fzf/completion.zsh ] && source /usr/share/fzf/completion.zsh
-[ -f /usr/share/fzf/key-bindings.zsh ] && source /usr/share/fzf/key-bindings.zsh
-[ -f /usr/share/doc/fzf/examples/completion.zsh ] && source /usr/share/doc/fzf/examples/completion.zsh
-[ -f /usr/share/doc/fzf/examples/key-bindings.zsh ] && source /usr/share/doc/fzf/examples/key-bindings.zsh
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-# export FZF_DEFAULT_COMMAND='rg --hidden -l ""'
+# Setup fzf
+# ---------
+if [[ ! "$PATH" == */home/dkeith/tools/.fzf/bin* ]]; then
+  export PATH="${PATH:+${PATH}:}/home/dkeith/tools/.fzf/bin"
+fi
+
+# Auto-completion
+# ---------------
+[[ $- == *i* ]] && source "/home/dkeith/tools/.fzf/shell/completion.zsh" 2> /dev/null
+
+# Key bindings
+# ------------
+source "/home/dkeith/tools/.fzf/shell/key-bindings.zsh"
+
 compinit
 
-
-# Speedy keys
-# xset r rate 210 40
-
+# Use lf to switch directories and bind it to ctrl-o
+lfcd () {
+    tmp="$(mktemp)"
+    lf -last-dir-path="$tmp" "$@"
+    if [ -f "$tmp" ]; then
+        dir="$(cat "$tmp")"
+        rm -f "$tmp" >/dev/null
+        [ -d "$dir" ] && [ "$dir" != "$(pwd)" ] && cd "$dir"
+    fi
+}
+bindkey -s '^o' 'lfcd^M'
 # Environment variables set everywhere
 export EDITOR="nvim"
 
-
-# remap caps to escape
-# setxkbmap -option caps:escape
-# swap escape and caps
-# setxkbmap -option caps:swapescape
-
-
+# ZSH_HIGHLIGHT_STYLES[suffix-alias]=fg=#689d6a,bold
+# ZSH_HIGHLIGHT_STYLES[unknown-token]=fg=#fb4934
+# ZSH_HIGHLIGHT_STYLES[precommand]=fg=#689d6a,bold
+# ZSH_HIGHLIGHT_STYLES[arg0]=fg=#689d6a
+# ZSH_HIGHLIGHT_STYLES[path]=none

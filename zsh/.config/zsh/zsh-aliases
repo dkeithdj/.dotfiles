@@ -1,27 +1,37 @@
 #!/bin/sh
 alias g='lazygit'
 alias zsh-update-plugins="find "$ZDOTDIR/plugins" -type d -exec test -e '{}/.git' ';' -print0 | xargs -I {} -0 git -C {} pull -q"
-alias nvimrc='nvim ~/.config/nvim/'
+alias reload='source $ZDOTDIR/.zshrc'
 
-# alias lvim='nvim -u ~/.local/share/lunarvim/lvim/init.lua --cmd "set runtimepath+=~/.local/share/lunarvim/lvim"'
 
 alias luamake=/home/dkeith/gitRepos/lua-language-server/3rd/luamake/luamake
 
 alias ddrive='cd /mnt/d'
 alias cdrive='cd /mnt/c/Users/DenreiK'
-alias configNvim='cd /home/dkeith/.config/nvim'
 
 alias python='python3.8'
 
 # Colorize grep output (good for log files)
-alias grep='grep --color=auto'
-alias egrep='egrep --color=auto'
-alias fgrep='fgrep --color=auto'
+alias \
+  grep='grep --color=auto' \
+  egrep='egrep --color=auto' \
+  fgrep='fgrep --color=auto' \
+  ls="ls -hN --color=auto --group-directories-first"
 
 # confirm before overwriting something
-alias cp="cp -i"
-alias mv='mv -i'
-alias rm='rm -i'
+alias \
+	cp="cp -iv" \
+	mv="mv -iv" \
+	rm="rm -vI" \
+	bc="bc -ql" \
+	mkd="mkdir -pv"
+
+# go edit file
+alias \
+  cfn='cd $HOME/.config/nvim && $EDITOR init.lua' \
+  cfz='cd $ZDOTDIR && $EDITOR .zshrc' \
+  cft='cd $HOME && $EDITOR .tmux.conf' \
+  cfb='cd $HOME/.local/bin && $EDITOR .'
 
 # easier to read disk
 alias df='df -h'     # human-readable sizes
