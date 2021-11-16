@@ -60,6 +60,9 @@ vim.g.loaded_perl_provider = 0
 vim.o.updatetime = 100
 vim.wo.signcolumn = 'yes'
 
+-- Set terminal wrap
+vim.cmd[[ au TermOpen * set wrap ]]
+
 -- Display settings
 --Set colorscheme (order is important here)
 vim.o.termguicolors = true

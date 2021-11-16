@@ -25,8 +25,7 @@ require('packer').startup(function()
   -- UI to select things (files, grep results, open buffers...)
   use { 'nvim-telescope/telescope.nvim', requires = { 'nvim-lua/plenary.nvim' } }
   use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
-  -- Moving around easily
-  use 'easymotion/vim-easymotion'
+  -- surround
   use 'tpope/vim-surround'
   -- Stylings
   use 'gruvbox-community/gruvbox' --colorscheme
@@ -39,11 +38,23 @@ require('packer').startup(function()
   use 'nvim-treesitter/nvim-treesitter'
   -- Additional textobjects for treesitter
   use 'nvim-treesitter/nvim-treesitter-textobjects'
+  -- Lsp
   use 'neovim/nvim-lspconfig' -- Collection of configurations for built-in LSP client
   use 'hrsh7th/nvim-cmp' -- Autocompletion plugin
   use 'hrsh7th/cmp-nvim-lsp'
   use 'saadparwaiz1/cmp_luasnip'
+  use 'hrsh7th/cmp-buffer'
+  use 'hrsh7th/cmp-path'
+  use 'ray-x/cmp-treesitter'
   use 'L3MON4D3/LuaSnip' -- Snippets plugin
+  use 'onsails/lspkind-nvim'
+  use { 'tami5/lspsaga.nvim', branch = 'nvim51' }
+  use 'ray-x/lsp_signature.nvim'
+
+  -- This is just for JAVA
+  use 'RishabhRD/nvim-lsputils'
+  use 'RishabhRD/popfix'
+
   use 'windwp/nvim-autopairs' -- auto close
   use 'dstein64/vim-startuptime'
 

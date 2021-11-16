@@ -31,5 +31,8 @@ require('dk.plugins.treesitter')
 -- LSP settings
 require('dk.lsp')
 
+-- Completion settings
+-- require('dk.lsp.completion')
+
 -- autopairing
-require('dk.plugins.autopairs')
+-- require('dk.plugins.autopairs')

@@ -1,15 +1,32 @@
+local telescope = require('telescope')
 local map = vim.api.nvim_set_keymap
 
-require('telescope').setup {
+telescope.setup {
   defaults = {
+    prompt_prefix = "❯ ",
+      selection_caret = "❯ ",
+      sorting_strategy = "ascending",
+      color_devicons = true,
+      layout_config = {
+        prompt_position = "bottom",
+        horizontal = {
+          width_padding = 0.04,
+          height_padding = 0.1,
+          preview_width = 0.6,
+        },
+        vertical = {
+          width_padding = 0.05,
+          height_padding = 1,
+          preview_height = 0.5,
+        },
+      },
     mappings = {
       i = {
         ['<C-u>'] = false,
         ['<C-d>'] = false,
       },
     },
-  },
-  extensions = {
+    extensions = {
       fzf = {
         fuzzy = true,                    -- false will only do exact matching
         override_generic_sorter = true,  -- override the generic sorter
@@ -17,11 +34,12 @@ require('telescope').setup {
         case_mode = "smart_case",        -- or "ignore_case" or "respect_case"
       }
     },
-  -- borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
+  }
 }
+  -- borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
 
 -- load_extension, somewhere after setup function:
-require('telescope').load_extension('fzf')
+telescope.load_extension('fzf')
 
 --Add leader shortcuts
 map('n', '<leader>tb', [[<cmd>lua require('telescope.builtin').buffers()<CR>]], { noremap = true, silent = true })
