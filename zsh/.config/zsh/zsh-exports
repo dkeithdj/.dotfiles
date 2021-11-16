@@ -8,3 +8,4 @@ export MANWIDTH=999
 export PATH=$HOME/.cargo/bin:$PATH
 export PATH="$HOME/tools/llvm-project/build/bin:$PATH"
 export LD_LIBRARY_PATH="$HOME/tools/llvm-project/build/lib:$LD_LIBRARY_PATH"
+export DOTFILES="$HOME/.dotfiles"

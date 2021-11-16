@@ -47,4 +47,5 @@ PS1="%F{$flight}[%F{$baqua}%n%F{$flight}] %(?:%F{$bgreen}➜ :%F{$bred}➜ )%F{$
 
 # PS1="%{$fg[blue]%}[%{$fg[white]%}%n%{$fg[red]%}@%{$fg[white]%}%m%{$fg[blue]%}] %(?:%{$fg_bold[green]%}➜ :%{$fg_bold[red]%}➜ )%{$fg[cyan]%}%c%{$reset_color%}"
 # PROMPT="%{$fg[green]%}%n@%m %~ %{$reset_color%}%#> "
-PS1+="\$vcs_info_msg_0_ "
+PS1+="\$vcs_info_msg_0_"
+PS1+="%F{$flight} "

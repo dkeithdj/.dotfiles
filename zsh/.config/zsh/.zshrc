@@ -1,5 +1,4 @@
-#!/bin/sh
-export ZDOTDIR=$HOME/.config/zsh
+#!/usr/bin/env bash
 HISTFILE=~/.cache/zsh/.zsh_history
 source $HOME/.zprofile
 setopt appendhistory
@@ -13,19 +12,20 @@ zle_highlight=('paste:none')
 # beeping is annoying
 unsetopt BEEP
 
-
 # completions
 autoload -Uz compinit
 zstyle ':completion:*' menu select
 zstyle ':completion::complete:lsof:*' menu yes select
 zmodload zsh/complist
-compinit
+# compinit
 _comp_options+=(globdots)		# Include hidden files.
 
 autoload -U up-line-or-beginning-search
 autoload -U down-line-or-beginning-search
 zle -N up-line-or-beginning-search
 zle -N down-line-or-beginning-search
+
+# [ -z "$TMUX"  ] && { tmux attach || exec tmux new-session;}
 
 # Colors
 autoload -Uz colors && colors
@@ -41,15 +41,14 @@ zsh_add_file "zsh-prompt"
 
 # Plugins
 zsh_add_plugin "zsh-users/zsh-autosuggestions"
-# zsh_add_plugin "zsh-users/zsh-syntax-highlighting"
 zsh_add_plugin "hlissner/zsh-autopair"
-# zsh_add_plugin "zdharma/fast-syntax-highlighting"
 
 # Key-bindings
 # bindkey -s '^t' 'nvim $(fzf)^M'
 # bindkey -s '^v' 'nvim\n'
 
-bindkey -s '^f' 'tmux-sessionizer^M'
+bindkey -s '^f' 'tmux-sessionizer\r'
+
 bindkey "^p" up-line-or-beginning-search # Up
 bindkey "^n" down-line-or-beginning-search # Down
 bindkey "^k" up-line-or-beginning-search # Up
@@ -87,8 +86,3 @@ bindkey -s '^o' 'lfcd^M'
 # Environment variables set everywhere
 export EDITOR="nvim"
 
-# ZSH_HIGHLIGHT_STYLES[suffix-alias]=fg=#689d6a,bold
-# ZSH_HIGHLIGHT_STYLES[unknown-token]=fg=#fb4934
-# ZSH_HIGHLIGHT_STYLES[precommand]=fg=#689d6a,bold
-# ZSH_HIGHLIGHT_STYLES[arg0]=fg=#689d6a
-# ZSH_HIGHLIGHT_STYLES[path]=none

@@ -2,6 +2,18 @@ export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_CACHE_HOME="$HOME/.cache"
 
+export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64/
+export PATH=$JAVA_HOME/bin:$PATH
+
+export M2_HOME=/opt/maven
+export MAVEN_HOME=/opt/maven
+export PATH=${M2_HOME}/bin:${PATH}
+export M2_REPO=$HOME/.m2/repository/
+export PATH=$M2_REPO:$PATH
+
+export PATH="$HOME/tools/llvm-project/build/bin:$PATH"
+export LD_LIBRARY_PATH="$HOME/tools/llvm-project/build/lib:$LD_LIBRARY_PATH"
+
 export LESSHISTFILE="-"
 
 export ZDOTDIR="${XDG_CONFIG_HOME:-$HOME/.config}/zsh"

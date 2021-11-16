@@ -28,10 +28,10 @@ alias \
 
 # go edit file
 alias \
-  cfn='cd $HOME/.config/nvim && $EDITOR init.lua' \
+  cfn='cd $DOTFILES/nvim/.config/nvim && $EDITOR .' \
   cfz='cd $ZDOTDIR && $EDITOR .zshrc' \
   cft='cd $HOME && $EDITOR .tmux.conf' \
-  cfb='cd $HOME/.local/bin && $EDITOR .'
+  cdf='cd $DOTFILES'
 
 # easier to read disk
 alias df='df -h'     # human-readable sizes
