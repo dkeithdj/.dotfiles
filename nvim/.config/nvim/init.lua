@@ -1,22 +1,21 @@
--- Install packer
+--Install packer
 require('dk.plugins.pack')
 
 -- Options and Display settings
 require('dk.options')
 
 local map = vim.api.nvim_set_keymap
---Remap space as leader key
-map('', '<Space>', '<Nop>', { noremap = true, silent = true })
-vim.g.mapleader = ' '
-vim.g.maplocalleader = ' '
+-- Remap space as leader key
+map('', '<Space>', '<Nop>', {noremap = true, silent = true})
+vim.g.mapleader = ' ' vim.g.maplocalleader = ' '
 
--- Mappings
+--Mappings
 require('dk.mappings')
 
 -- Autocmds
 require('dk.autocmds')
 
---Map blankline
+-- Map blankline
 require('dk.plugins.blankline')
 
 -- Gitsigns
@@ -31,8 +30,14 @@ require('dk.plugins.treesitter')
 -- LSP settings
 require('dk.lsp')
 
--- Completion settings
--- require('dk.lsp.completion')
+-- lualine
+require('dk.plugins.lualine')
+-- bufferline
+require('dk.plugins.bufferline')
 
--- autopairing
--- require('dk.plugins.autopairs')
+-- formatter
+-- require('dk.plugins.formatter')
+
+-- Completion settings-- require('dk.lsp.completion')
+
+-- autopairing-- require('dk.plugins.autopairs')

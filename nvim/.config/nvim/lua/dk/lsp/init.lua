@@ -5,31 +5,31 @@ local lspsaga = require('lspsaga')
 local nvim_lsp = require('lspconfig')
 local map = vim.api.nvim_buf_set_keymap
 
-vim.cmd [[autocmd ColorScheme * highlight NormalFloat guibg=#504945]]
-vim.cmd [[autocmd ColorScheme * highlight FloatBorder guifg=white guibg=#504945]]
+-- vim.cmd [[autocmd ColorScheme * highlight NormalFloat guibg=#504945]]
+-- vim.cmd [[autocmd ColorScheme * highlight FloatBorder guifg=white guibg=#504945]]
 
-local border = {
-  {"╭", "FloatBorder"},
-  {"─", "FloatBorder"},
-  {"╮", "FloatBorder"},
-  {"│", "FloatBorder"},
-  {"╯", "FloatBorder"},
-  {"─", "FloatBorder"},
-  {"╰", "FloatBorder"},
-  {"│", "FloatBorder"},
-}
+-- local border = {
+--   {"╭", "FloatBorder"},
+--   {"─", "FloatBorder"},
+--   {"╮", "FloatBorder"},
+--   {"│", "FloatBorder"},
+--   {"╯", "FloatBorder"},
+--   {"─", "FloatBorder"},
+--   {"╰", "FloatBorder"},
+--   {"│", "FloatBorder"},
+-- }
 
 local on_attach = function(_, bufnr)
 
-  vim.lsp.handlers["textDocument/hover"] =  vim.lsp.with(vim.lsp.handlers.hover, {border = border})
-  vim.lsp.handlers["textDocument/signatureHelp"] =  vim.lsp.with(vim.lsp.handlers.signature_help, {border = border})
-  vim.lsp.handlers["textDocument/completion"] =  vim.lsp.with(vim.lsp.handlers.signature_help, {border = border})
+  -- vim.lsp.handlers["textDocument/hover"] =  vim.lsp.with(vim.lsp.handlers.hover, {border = border})
+  -- vim.lsp.handlers["textDocument/signatureHelp"] =  vim.lsp.with(vim.lsp.handlers.signature_help, {border = border})
+  -- vim.lsp.handlers["textDocument/completion"] =  vim.lsp.with(vim.lsp.handlers.signature_help, {border = border})
 
   -- vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
   local opts = { noremap = true, silent = true }
   map(bufnr, 'n', '<leader>sd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
-  map(bufnr, 'n', '<leader>sh', '<cmd>Lspsaga hover_doc<CR>', opts)
+  map(bufnr, 'n', 'K', '<cmd>Lspsaga hover_doc<CR>', opts)
   map(bufnr, 'n', '<leader>sg', '<cmd>Lspsaga signature_help<CR>', opts)
   map(bufnr, 'n', '<leader>srn', '<cmd>Lspsaga rename<CR>', opts)
   map(bufnr, 'n', '<leader>sre', '<cmd>Lspsaga lsp_finder<CR>', opts)
@@ -39,6 +39,10 @@ local on_attach = function(_, bufnr)
   map(bufnr, 'n', '<leader>sp', '<cmd>Lspsaga diagnostic_jump_prev<CR>', opts)
   map(bufnr, 'n', '<leader>sn', '<cmd>Lspsaga diagnostic_jump_next()<CR>', opts)
   map(bufnr, 'n', '<leader>sl', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
+
+  map(bufnr, 'n', '<c-k>', '<cmd>lua require("lspsaga.action").smart_scroll_with_saga(1)<CR>', opts)
+  map(bufnr, 'n', '<c-j>', '<cmd>lua require("lspsaga.action").smart_scroll_with_saga(-1)<CR>', opts)
+
 end
 
 -- nvim-cmp supports additional completion capabilities
@@ -72,11 +76,11 @@ for _, lsp in ipairs(servers) do
 end
 
 vim.api.nvim_exec([[
-  augroup lsp
-  au!
-  autocmd FileType java lua require'dk.lsp.java-config'.setup()
-  augroup end
-]], false)
+augroup lsp
+au!
+autocmd FileType java lua require'dk.lsp.java-config'.setup()
+augroup end
+  ]], false)
 
 nvim_lsp.clangd.setup{
   cmd = {"clangd-12", "--background-index"},
@@ -92,16 +96,20 @@ table.insert(runtime_path, "lua/?.lua")
 table.insert(runtime_path, "lua/?/init.lua")
 
 nvim_lsp.sumneko_lua.setup{
-    cmd = {sumneko_binary, "-E", sumneko_root_path .. '/main.lua'};
-    settings = {
-        Lua = {
-            diagnostics = {
-                enable = true,
-                globals = { "vim" },
-            },
-        }
-    },
-    on_attach=on_attach,
+  cmd = {sumneko_binary, "-E", sumneko_root_path .. '/main.lua'};
+  init_options = {
+    formatting = true,
+  },
+  settings = {
+    Lua = {
+      diagnostics = {
+        enable = true,
+        globals = { "vim" },
+      },
+    }
+  },
+  on_attach=on_attach,
+  capabilities=capabilities
 }
 
 -- require "lsp_signature".setup({

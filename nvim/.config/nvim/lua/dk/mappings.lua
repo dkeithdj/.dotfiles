@@ -8,19 +8,24 @@ map('n', 'j', "v:count == 0 ? 'gj' : 'j'", { noremap = true, expr = true, silent
 map('n', '<leader>,', '<cmd>noh<CR>',opts)
 
 -- source neovim
-map('n', '<leader>[', '<cmd>luafile init.lua<CR>',opts)
+map('n', '<leader>[', '<cmd>luafile%<CR>',{ noremap = true, silent = false })
 
 -- paste from outside vim
 map('v', '<leader>p', '"_dP<CR>',opts)
 map('n', '<leader>p', '"+p<CR>',opts)
 
-
--- Y yank until the end of line  (note: this is now a default on master)
-map('n', 'Y', 'y$', { noremap = true })
-
 map('n', '<leader>y', '"+y<CR>', opts)
 map('v', '<leader>y', '"+y<CR>', opts)
 map('n', '<leader>Y', 'gg"+yG"<CR>',opts)
+
+-- indent
+map('v', '>', '>gv',opts)
+map('v', '<', '<gv',opts)
+
+map('n', '<leader>rb', '<cmd>bdelete<CR>', opts)
+
+map('n', '<c-j>', '<cmd>lua require("lspsaga.action").smart_scroll_with_saga(1)<CR>', opts)
+map('n', '<c-k>', '<cmd>lua require("lspsaga.action").smart_scroll_with_saga(-1)<CR>', opts)
 
 --terminal settings
 local terminal = 'zsh' --choose terminal

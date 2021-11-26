@@ -60,6 +60,7 @@ vim.g.loaded_perl_provider = 0
 vim.o.updatetime = 100
 vim.wo.signcolumn = 'yes'
 
+
 -- Set terminal wrap
 vim.cmd[[ au TermOpen * set wrap ]]
 
@@ -83,9 +84,3 @@ vim.api.nvim_exec(
 
 vim.cmd [[colorscheme gruvbox]]
 
---Set statusbar
-vim.g.lightline = {
-  colorscheme = 'gruvbox',
-  active = { left = { { 'mode', 'paste' }, { 'gitbranch', 'readonly', 'filename', 'modified' } } },
-  component_function = { gitbranch = 'fugitive#head' },
-}

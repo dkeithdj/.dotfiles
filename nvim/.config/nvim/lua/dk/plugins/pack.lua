@@ -20,7 +20,9 @@ require('packer').startup(function()
   use 'wbthomason/packer.nvim' -- Package manager
   use 'tpope/vim-fugitive' -- Git commands in nvim
   use 'tpope/vim-rhubarb' -- Fugitive-companion to interact with github
-  use 'tpope/vim-commentary' -- "gc" to comment visual regions/lines
+  -- use 'tpope/vim-commentary' -- "gc" to comment visual regions/lines
+  use 'b3nj5m1n/kommentary'
+  use 'mhartington/formatter.nvim'
   -- use 'ludovicchabant/vim-gutentags' -- Automatic tags management
   -- UI to select things (files, grep results, open buffers...)
   use { 'nvim-telescope/telescope.nvim', requires = { 'nvim-lua/plenary.nvim' } }
@@ -29,7 +31,9 @@ require('packer').startup(function()
   use 'tpope/vim-surround'
   -- Stylings
   use 'gruvbox-community/gruvbox' --colorscheme
-  use 'itchyny/lightline.vim' -- Fancier statusline
+  -- use 'itchyny/lightline.vim' -- Fancier statusline
+  use 'nvim-lualine/lualine.nvim'
+  use {'akinsho/bufferline.nvim', requires = {'kyazdani42/nvim-web-devicons'} }
   -- Add indentation guides even on blank lines
   use 'lukas-reineke/indent-blankline.nvim'
   -- Add git related info in the signs columns and popups
@@ -38,6 +42,7 @@ require('packer').startup(function()
   use 'nvim-treesitter/nvim-treesitter'
   -- Additional textobjects for treesitter
   use 'nvim-treesitter/nvim-treesitter-textobjects'
+  use 'p00f/nvim-ts-rainbow'
   -- Lsp
   use 'neovim/nvim-lspconfig' -- Collection of configurations for built-in LSP client
   use 'hrsh7th/nvim-cmp' -- Autocompletion plugin
