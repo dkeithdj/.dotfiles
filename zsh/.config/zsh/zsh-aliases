@@ -3,6 +3,7 @@ alias g='lazygit'
 alias zsh-update-plugins="find "$ZDOTDIR/plugins" -type d -exec test -e '{}/.git' ';' -print0 | xargs -I {} -0 git -C {} pull -q"
 alias reload='source $ZDOTDIR/.zshrc'
 
+alias v=nvim
 
 alias luamake=/home/dkeith/gitRepos/lua-language-server/3rd/luamake/luamake
 
@@ -36,7 +37,4 @@ alias \
 # easier to read disk
 alias df='df -h'     # human-readable sizes
 alias free='free -m' # show sizes in MB
-
-alias m="git checkout master"
-alias s="git checkout stable"
 
