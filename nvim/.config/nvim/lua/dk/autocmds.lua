@@ -1,5 +1,5 @@
 -- Highlight on yank
-vim.api.nvim_exec(
+vim.cmd(
   [[
   augroup YankHighlight
     autocmd!

@@ -5,9 +5,10 @@ vim.o.inccommand = 'nosplit'
 vim.o.hlsearch = false
 
 -- Set relative line number
-vim.wo.relativenumber = true
---Make line numbers default
-vim.wo.number = true
+vim.cmd[[
+  set relativenumber
+  set number
+]]
 
 --Do not save when switching buffers (note: this is now a default on master)
 vim.o.hidden = true
@@ -60,27 +61,6 @@ vim.g.loaded_perl_provider = 0
 vim.o.updatetime = 100
 vim.wo.signcolumn = 'yes'
 
-
 -- Set terminal wrap
 vim.cmd[[ au TermOpen * set wrap ]]
-
--- Display settings
---Set colorscheme (order is important here)
-vim.o.termguicolors = true
-
-vim.g.gruvbox_invert_selection = 1
-vim.g.gruvbox_termcolors = 256
-
--- Set background transparent
-vim.api.nvim_exec(
-  [[
-  augroup TransparentBG
-    autocmd!
-    autocmd ColorScheme * hi Normal guibg=none
-  augroup end
-  ]],
-  false
-)
-
-vim.cmd [[colorscheme gruvbox]]
 

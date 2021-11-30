@@ -3,9 +3,9 @@ local lualine = require('lualine')
 lualine.setup {
   options = {
     icons_enabled = true,
-    theme = 'gruvbox',
-    section_separators = {left = '', right = ''},
-    component_separators = {left = '', right = ''},
+    theme = 'gruvbox-material',
+    component_separators = '|',
+    section_separators = { left = '', right = '' },
     disabled_filetypes = {}
   },
   sections = {
@@ -15,10 +15,28 @@ lualine.setup {
       'filename',
       file_status = true, -- displays file status (readonly status, modified status)
       path = 0, -- 0 = just filename, 1 = relative path, 2 = absolute path
-      "require'lsp-status'.status()"
-    }},
+    },
+      {'diagnostics',
+        sources = {"nvim_lsp"},
+        diagnostics_color = {
+          error = { fg = '#F2594B' },
+          warn = { fg = '#e9b143' },
+          info = { fg = '#80aa9e' },
+          hint = { fg = '#b0b846' },
+        },
+        symbols = {error = ' ', warn = ' ', info = ' ', hint = ' '},
+        colored = true,
+      },
+    },
     lualine_x = {
-      { 'diagnostics', sources = {"nvim_lsp"}, symbols = {error = ' ', warn = ' ', info = ' ', hint = ' '} },
+      {
+        'fileformat',
+        symbols = {
+          unix = '', -- e712
+          dos = '', -- e70f
+          mac = '', -- e711
+        }
+      },
       'encoding',
       'filetype'
     },

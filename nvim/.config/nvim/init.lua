@@ -15,6 +15,9 @@ require('dk.mappings')
 -- Autocmds
 require('dk.autocmds')
 
+-- colors
+require('dk.colors')
+
 -- Map blankline
 require('dk.plugins.blankline')
 
@@ -35,9 +38,8 @@ require('dk.plugins.lualine')
 -- bufferline
 require('dk.plugins.bufferline')
 
--- formatter
--- require('dk.plugins.formatter')
+-- Comment
+require('dk.plugins.comment')
 
--- Completion settings-- require('dk.lsp.completion')
-
--- autopairing-- require('dk.plugins.autopairs')
+-- nvim-tree
+require('dk.plugins.nvim-tree')

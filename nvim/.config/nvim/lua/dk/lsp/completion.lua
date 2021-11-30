@@ -1,20 +1,53 @@
 -- nvim-cmp setup
 local cmp = require 'cmp'
 local luasnip = require 'luasnip'
+local lspkind = require 'lspkind'
 
+local border = {
+  {"╭", "FloatBorder"},
+  {"─", "FloatBorder"},
+  {"╮", "FloatBorder"},
+  {"│", "FloatBorder"},
+  {"╯", "FloatBorder"},
+  {"─", "FloatBorder"},
+  {"╰", "FloatBorder"},
+  {"│", "FloatBorder"},
+}
+-- To instead override globally
+local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
+function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
+  opts = opts or {}
+  opts.border = opts.border or border
+  return orig_util_open_floating_preview(contents, syntax, opts, ...)
+end
 -- local has_words_before = function()
 --   local line, col = unpack(vim.api.nvim_win_get_cursor(0))
 --   return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
 -- end
-vim.cmd [[autocmd ColorScheme * highlight CmpItemKind guifg=#8ec07c]]
-vim.cmd [[autocmd ColorScheme * highlight CmpItemMenu guifg=#83a598]]
+
+vim.cmd ([[
+highlight! link CmpItemAbbrMatchFuzzy Aqua
+highlight! link CmpItemKindText Fg
+highlight! link CmpItemKindMethod Purple
+highlight! link CmpItemKindFunction Purple
+highlight! link CmpItemKindConstructor Green
+highlight! link CmpItemKindField Aqua
+highlight! link CmpItemKindVariable Blue
+highlight! link CmpItemKindClass Green
+highlight! link CmpItemKindInterface Green
+highlight! link CmpItemKindValue Orange
+highlight! link CmpItemKindKeyword Keyword
+highlight! link CmpItemKindSnippet Red
+highlight! link CmpItemKindFile Orange
+highlight! link CmpItemKindFolder Orange
+]])
 
 cmp.setup {
   completion = {
     completeopt = 'menuone,noinsert'
   },
   formatting = {
-    format = require("lspkind").cmp_format({with_text = false, maxwidth = 50, menu = ({
+    format = lspkind.cmp_format({with_text = false, maxwidth = 50, menu = ({
       buffer = "[Buffer]",
       nvim_lsp = "[LSP]",
       treesitter = "[TSitter]",
@@ -68,7 +101,7 @@ cmp.setup {
     { name = 'nvim_lsp' },
     { name = 'luasnip' },
     { name = 'buffer', keyword_length = 5 },
-    { name = 'treesitter'},
+    { name = 'treesitter', keyword_length = 3},
     { name = 'path' },
   },
 }

@@ -15,22 +15,25 @@ function M.setup()
 
   local on_attach = function(_, bufnr)
     require('jdtls.setup').add_commands()
-  local opts = { noremap = true, silent = true }
+    local opts = { noremap = true, silent = true }
     map(bufnr, 'n', '<leader>sd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
     map(bufnr, 'n', 'K', '<cmd>Lspsaga hover_doc<CR>', opts)
-    map(bufnr, 'n', '<leader>sg', '<cmd>Lspsaga signature_help<CR>', opts)
-    map(bufnr, 'n', '<leader>srn', '<cmd>Lspsaga rename<CR>', opts)
-    map(bufnr, 'n', '<leader>sre', '<cmd>Lspsaga lsp_finder<CR>', opts)
-    map(bufnr, 'n', '<leader>sld', '<cmd>Lspsaga show_line_diagnostics<CR>', opts)
+    map(bufnr, 'n', '<leader>sg', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+    map(bufnr, 'n', '<leader>sr', '<cmd>Lspsaga rename<CR>', opts)
+    map(bufnr, 'n', '<leader>sf', '<cmd>Lspsaga lsp_finder<CR>', opts)
+    map(bufnr, 'n', '<leader>sc', '<cmd>Lspsaga code_action<CR>', opts)
+    map(bufnr, 'v', '<leader>sc', '<C-U>Lspsaga range_code_action<CR>', opts)
+    map(bufnr, 'n', '<leader>se', '<cmd>Lspsaga show_line_diagnostics<CR>', opts)
     map(bufnr, 'n', '<leader>sp', '<cmd>Lspsaga diagnostic_jump_prev<CR>', opts)
     map(bufnr, 'n', '<leader>sn', '<cmd>Lspsaga diagnostic_jump_next()<CR>', opts)
     map(bufnr, 'n', '<leader>sl', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
+
     -- Java-specific
-    map(bufnr, 'n', '<leader>jca', '<Cmd>lua require("jdtls").code_action()<CR>', opts)
-    map(bufnr, 'n', '<leader>joi', '<Cmd>lua require"jdtls".organize_imports()<CR>', opts)
-    map(bufnr, 'n', '<leader>jev', '<Cmd>lua require("jdtls").extract_variable()<CR>', opts)
-    map(bufnr, 'v', '<leader>jev', '<Esc><Cmd>lua require("jdtls").extract_variable(true)<CR>', opts)
-    map(bufnr, 'v', '<leader>jem', '<Esc><Cmd>lua require("jdtls").extract_method(true)<CR>', opts)
+    map(bufnr, 'n', '<leader>jc', '<Cmd>lua require("jdtls").code_action()<CR>', opts)
+    map(bufnr, 'n', '<leader>jo', '<Cmd>lua require"jdtls".organize_imports()<CR>', opts)
+    map(bufnr, 'n', '<leader>je', '<Cmd>lua require("jdtls").extract_variable()<CR>', opts)
+    map(bufnr, 'v', '<leader>je', '<Esc><Cmd>lua require("jdtls").extract_variable(true)<CR>', opts)
+    map(bufnr, 'v', '<leader>jm', '<Esc><Cmd>lua require("jdtls").extract_method(true)<CR>', opts)
     map(bufnr, 'n', '<leader>jcr', '<Cmd>lua require("jdtls").code_action(false, "refactor")<CR>', opts)
   end
 
@@ -86,7 +89,7 @@ function M.setup()
     MID_VERTICAL = '│',
     BOTTOM_LEFT = '╰',
     BOTTOM_RIGHT = '╯',
-   }
+  }
 
   vim.g.lsp_utils_codeaction_opts = {
     list = {

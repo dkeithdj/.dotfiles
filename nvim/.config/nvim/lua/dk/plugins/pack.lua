@@ -5,7 +5,7 @@ if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
   vim.fn.execute('!git clone https://github.com/wbthomason/packer.nvim ' .. install_path)
 end
 
-vim.api.nvim_exec(
+vim.cmd(
   [[
   augroup Packer
     autocmd!
@@ -20,18 +20,17 @@ require('packer').startup(function()
   use 'wbthomason/packer.nvim' -- Package manager
   use 'tpope/vim-fugitive' -- Git commands in nvim
   use 'tpope/vim-rhubarb' -- Fugitive-companion to interact with github
-  -- use 'tpope/vim-commentary' -- "gc" to comment visual regions/lines
-  use 'b3nj5m1n/kommentary'
+  use 'numToStr/Comment.nvim'
   use 'mhartington/formatter.nvim'
-  -- use 'ludovicchabant/vim-gutentags' -- Automatic tags management
   -- UI to select things (files, grep results, open buffers...)
   use { 'nvim-telescope/telescope.nvim', requires = { 'nvim-lua/plenary.nvim' } }
   use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
   -- surround
   use 'tpope/vim-surround'
   -- Stylings
-  use 'gruvbox-community/gruvbox' --colorscheme
-  -- use 'itchyny/lightline.vim' -- Fancier statusline
+  -- Colorsheme
+  use 'sainnhe/gruvbox-material'
+
   use 'nvim-lualine/lualine.nvim'
   use {'akinsho/bufferline.nvim', requires = {'kyazdani42/nvim-web-devicons'} }
   -- Add indentation guides even on blank lines
@@ -53,7 +52,7 @@ require('packer').startup(function()
   use 'ray-x/cmp-treesitter'
   use 'L3MON4D3/LuaSnip' -- Snippets plugin
   use 'onsails/lspkind-nvim'
-  use { 'tami5/lspsaga.nvim', branch = 'nvim51' }
+  use 'tami5/lspsaga.nvim'
   use 'ray-x/lsp_signature.nvim'
 
   -- This is just for JAVA
@@ -65,4 +64,6 @@ require('packer').startup(function()
 
   use 'williamboman/nvim-lsp-installer'
   use 'mfussenegger/nvim-jdtls'
+
+  use 'kyazdani42/nvim-tree.lua'
 end)

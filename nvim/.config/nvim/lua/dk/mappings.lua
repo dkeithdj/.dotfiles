@@ -8,7 +8,7 @@ map('n', 'j', "v:count == 0 ? 'gj' : 'j'", { noremap = true, expr = true, silent
 map('n', '<leader>,', '<cmd>noh<CR>',opts)
 
 -- source neovim
-map('n', '<leader>[', '<cmd>luafile%<CR>',{ noremap = true, silent = false })
+map('n', '<leader>lo', '<cmd>luafile%<CR>',{ noremap = true, silent = false })
 
 -- paste from outside vim
 map('v', '<leader>p', '"_dP<CR>',opts)

@@ -25,12 +25,3 @@ formatter.setup{
   }
 }
 
-vim.api.nvim_exec(
-	[[
-augroup FormatAutogroup
-  autocmd!
-  autocmd BufWritePost *.lua,*.java FormatWrite
-augroup END
-]],
-	true
-)
