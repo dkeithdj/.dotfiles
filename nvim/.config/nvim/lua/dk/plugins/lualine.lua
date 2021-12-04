@@ -3,7 +3,7 @@ local lualine = require('lualine')
 lualine.setup {
   options = {
     icons_enabled = true,
-    theme = 'gruvbox-material',
+    theme = 'nightfox',
     component_separators = '|',
     section_separators = { left = '', right = '' },
     disabled_filetypes = {}
@@ -18,12 +18,13 @@ lualine.setup {
     },
       {'diagnostics',
         sources = {"nvim_lsp"},
-        diagnostics_color = {
-          error = { fg = '#F2594B' },
-          warn = { fg = '#e9b143' },
-          info = { fg = '#80aa9e' },
-          hint = { fg = '#b0b846' },
-        },
+        -- diagnostics_color = {
+        --   error = { fg = '#F2594B' },
+        --   warn = { fg = '#e9b143' },
+        --   info = { fg = '#80aa9e' },
+        --   hint = { fg = '#b0b846' },
+        -- },
+
         symbols = {error = ' ', warn = ' ', info = ' ', hint = ' '},
         colored = true,
       },

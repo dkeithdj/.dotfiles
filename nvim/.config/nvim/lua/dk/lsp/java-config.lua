@@ -1,15 +1,12 @@
 local M = {}
 function M.setup()
 
-  vim.lsp.handlers['textDocument/codeAction'] = require'lsputil.codeAction'.code_action_handler
-  vim.lsp.handlers['workspace/symbol'] = require'lsputil.symbols'.workspace_handler
-
   local map = vim.api.nvim_buf_set_keymap
-  local jdtls_ui = require'jdtls.ui'
+  -- local jdtls_ui = require'jdtls.ui'
 
-  function jdtls_ui.pick_one_async(items, _, _, cb)
-    require'lsputil.codeAction'.code_action_handler(nil, items, nil, nil, cb)
-  end
+  -- function jdtls_ui.pick_one_async(items, _, _, cb)
+  --   require'lsputil.codeAction'.code_action_handler(nil, items, nil, nil, cb)
+  -- end
 
   -- vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
@@ -17,16 +14,11 @@ function M.setup()
     require('jdtls.setup').add_commands()
     local opts = { noremap = true, silent = true }
     map(bufnr, 'n', '<leader>sd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
-    map(bufnr, 'n', 'K', '<cmd>Lspsaga hover_doc<CR>', opts)
+    map(bufnr, 'n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
     map(bufnr, 'n', '<leader>sg', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
-    map(bufnr, 'n', '<leader>sr', '<cmd>Lspsaga rename<CR>', opts)
-    map(bufnr, 'n', '<leader>sf', '<cmd>Lspsaga lsp_finder<CR>', opts)
-    map(bufnr, 'n', '<leader>sc', '<cmd>Lspsaga code_action<CR>', opts)
-    map(bufnr, 'v', '<leader>sc', '<C-U>Lspsaga range_code_action<CR>', opts)
-    map(bufnr, 'n', '<leader>se', '<cmd>Lspsaga show_line_diagnostics<CR>', opts)
-    map(bufnr, 'n', '<leader>sp', '<cmd>Lspsaga diagnostic_jump_prev<CR>', opts)
-    map(bufnr, 'n', '<leader>sn', '<cmd>Lspsaga diagnostic_jump_next()<CR>', opts)
-    map(bufnr, 'n', '<leader>sl', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
+    map(bufnr, 'n', '<leader>se', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics({border="double",focusable=false})<CR>', opts)
+    map(bufnr, 'n', '<leader>sn', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
+    map(bufnr, 'n', '<leader>sp', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
 
     -- Java-specific
     map(bufnr, 'n', '<leader>jc', '<Cmd>lua require("jdtls").code_action()<CR>', opts)
@@ -80,57 +72,6 @@ function M.setup()
   config.on_attach = on_attach()
 
   require('jdtls').start_or_attach(config)
-
-
-  local border_chars = {
-    TOP_LEFT = '╭',
-    TOP_RIGHT = '╮',
-    MID_HORIZONTAL = '─',
-    MID_VERTICAL = '│',
-    BOTTOM_LEFT = '╰',
-    BOTTOM_RIGHT = '╯',
-  }
-
-  vim.g.lsp_utils_codeaction_opts = {
-    list = {
-      border = true,
-      border_chars = border_chars
-    },
-    preview = {
-      title = 'Code Action',
-      border = true,
-      border_chars = border_chars
-    },
-  }
-
-  vim.g.lsp_utils_location_opts = {
-    height = 24,
-    mode = 'split',
-    list = {
-      border = true,
-      numbering = true,
-    },
-    preview = {
-      title = 'Location Preview',
-      border = true,
-      border_chars = border_chars
-    },
-  }
-
-  vim.g.lsp_utils_symbols_opts = {
-    height = 24,
-    mode = 'editor',
-    list = {
-      border = true,
-      numbering = false,
-    },
-    preview = {
-      title = 'Symbols Preview',
-      border = true,
-      border_chars = border_chars
-    },
-    prompt = {}
-  }
 
 end
 

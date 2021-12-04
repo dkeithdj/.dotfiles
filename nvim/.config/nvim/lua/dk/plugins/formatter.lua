@@ -13,15 +13,15 @@ formatter.setup{
         }
       end
     },
-    -- lua = {
-			-- function()
-				-- return {
-					-- exe = "clang-format",
-					-- args = { "-" },
-					-- stdin = true,
-				-- }
-			-- end,
-		-- },
+    lua = {
+			function()
+				return {
+					exe = "stylua",
+					args = { "-" },
+					stdin = true,
+				}
+			end,
+		},
   }
 }
 

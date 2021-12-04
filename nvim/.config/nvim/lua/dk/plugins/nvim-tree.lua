@@ -11,10 +11,13 @@ require('nvim-tree').setup{
   diagnostics = {
     enable = true,
     icons = {
-      hint = "",
+      hint = "",
       info = "",
       warning = "",
       error = "",
     }
   },
 }
+
+vim.cmd[[autocmd ColorScheme * highlight NvimTreeNormal guibg=none]]
+

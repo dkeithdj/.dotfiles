@@ -1,45 +1,23 @@
---Install packer
-require('dk.plugins.pack')
-
--- Options and Display settings
-require('dk.options')
-
 local map = vim.api.nvim_set_keymap
 -- Remap space as leader key
-map('', '<Space>', '<Nop>', {noremap = true, silent = true})
-vim.g.mapleader = ' ' vim.g.maplocalleader = ' '
+map("", "<Space>", "<Nop>", { noremap = true, silent = true })
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
+
+-- Options and Display settings
+require "dk.options"
 
 --Mappings
-require('dk.mappings')
+require "dk.mappings"
 
 -- Autocmds
-require('dk.autocmds')
+require "dk.autocmds"
 
 -- colors
-require('dk.colors')
-
--- Map blankline
-require('dk.plugins.blankline')
-
--- Gitsigns
-require('dk.plugins.gitsigns')
-
--- Telescope
-require('dk.plugins.telescope')
-
--- Treesitter configuration
-require('dk.plugins.treesitter')
+require "dk.colors"
 
 -- LSP settings
-require('dk.lsp')
+require "dk.lsp"
 
--- lualine
-require('dk.plugins.lualine')
--- bufferline
-require('dk.plugins.bufferline')
-
--- Comment
-require('dk.plugins.comment')
-
--- nvim-tree
-require('dk.plugins.nvim-tree')
+-- plugins
+require "dk.plugins"

@@ -8,6 +8,7 @@ vim.o.hlsearch = false
 vim.cmd[[
   set relativenumber
   set number
+  set cursorline
 ]]
 
 --Do not save when switching buffers (note: this is now a default on master)

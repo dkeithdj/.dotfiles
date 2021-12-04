@@ -10,6 +10,9 @@ require('nvim-treesitter.configs').setup {
     -- colors = {}, -- table of hex strings
     -- termcolors = {} -- table of colour name strings
   },
+  autotag = {
+    enable = true,
+  },
   incremental_selection = {
     enable = true,
     keymaps = {
@@ -18,6 +21,10 @@ require('nvim-treesitter.configs').setup {
       scope_incremental = '<A-e>',
       node_decremental = '<A-C-w>',
     },
+  },
+  context_commentstring = {
+    enable = true,
+    enable_autocmd = false,
   },
   indent = {
     enable = true,
