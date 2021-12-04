@@ -28,15 +28,27 @@ zstyle ':vcs_info:git*+set-message:*' hooks git-untracked
 }
 
 # Gruvbox Colors
-bred='#fb4934'
-bgreen='#b8bb26'
-borange='#fe8019'
-byellow='#fabd2f'
-bblue='#83a598'
-baqua='#8ec07c'
-bpurple='#d3869b'
-ggray='#928374'
-flight='#fbf1c7'
+# bred='#fb4934'
+# bgreen='#b8bb26'
+# borange='#fe8019'
+# byellow='#fabd2f'
+# bblue='#83a598'
+# baqua='#8ec07c'
+# bpurple='#d3869b'
+# ggray='#928374'
+# flight='#fbf1c7'
+
+# NightFox Colors
+
+bred="#c94f6d",
+bgreen="#81b29a",
+byellow="#dbc074",
+bblue="#7daea3",
+baqua="#63cdcf",
+borange="#f4a261",
+bpurple="#d67ad2",
+black="#393b44",
+flight="#dfdfe0",
 
 zstyle ':vcs_info:*' check-for-changes true
 # zstyle ':vcs_info:git:*' formats " %r/%S %b %m%u%c "
