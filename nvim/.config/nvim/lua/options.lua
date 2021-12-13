@@ -1,24 +1,27 @@
+-- ignore stuff
+vim.g.wildignore="**/node_modules/*"
+
 --Incremental live completion (note: this is now a default on master)
-vim.o.inccommand = 'nosplit'
+vim.o.inccommand = "nosplit"
 
 --Set highlight on search
 vim.o.hlsearch = false
 
 -- Set relative line number
-vim.cmd[[
+vim.cmd([[
   set relativenumber
   set number
   set cursorline
-]]
+]])
 
 --Do not save when switching buffers (note: this is now a default on master)
 vim.o.hidden = true
 
 --Enable mouse mode
-vim.o.mouse = 'a'
+vim.o.mouse = "a"
 
 -- Don't show mode
-vim.cmd[[ set noshowmode ]]
+vim.cmd([[ set noshowmode ]])
 
 --Enable break indent
 vim.o.breakindent = true
@@ -60,8 +63,7 @@ vim.g.loaded_ruby_provider = 0
 vim.g.loaded_perl_provider = 0
 --Decrease update time
 vim.o.updatetime = 100
-vim.wo.signcolumn = 'yes'
+vim.wo.signcolumn = "yes"
 
 -- Set terminal wrap
-vim.cmd[[ au TermOpen * set wrap ]]
-
+vim.cmd([[ au TermOpen * set wrap ]])

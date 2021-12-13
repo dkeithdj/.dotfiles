@@ -1,23 +1,17 @@
-local map = vim.api.nvim_set_keymap
--- Remap space as leader key
-map("", "<Space>", "<Nop>", { noremap = true, silent = true })
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
 -- Options and Display settings
-require "dk.options"
+require("options")
 
 --Mappings
-require "dk.mappings"
+require("mappings")
 
 -- Autocmds
-require "dk.autocmds"
+require("autocmds")
 
 -- colors
-require "dk.colors"
+require("colors")
 
 -- LSP settings
-require "dk.lsp"
-
--- plugins
-require "dk.plugins"
+require("lsp")

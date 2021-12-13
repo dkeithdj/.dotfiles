@@ -9,3 +9,4 @@ require('gitsigns').setup {
     changedelete = {hl = 'GitSignsChange', text = '▌', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn'},
   },
 }
+
