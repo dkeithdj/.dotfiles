@@ -39,16 +39,26 @@ zstyle ':vcs_info:git*+set-message:*' hooks git-untracked
 # flight='#fbf1c7'
 
 # NightFox Colors
+# bred="#c94f6d",
+# bgreen="#81b29a",
+# byellow="#dbc074",
+# bblue="#7daea3",
+# baqua="#63cdcf",
+# borange="#f4a261",
+# bpurple="#d67ad2",
+# black="#393b44",
+# flight="#dfdfe0",
 
-bred="#c94f6d",
+# Rose-Pine
+bred='#eb6f92',
 bgreen="#81b29a",
-byellow="#dbc074",
-bblue="#7daea3",
-baqua="#63cdcf",
-borange="#f4a261",
-bpurple="#d67ad2",
-black="#393b44",
-flight="#dfdfe0",
+byellow='#f6c177',
+bblue='#31748f',
+baqua='#9ccfd8',
+borange='#ebbcba',
+bpurple='#c4a7e7',
+black='#21202e',
+flight='#e0def4',
 
 zstyle ':vcs_info:*' check-for-changes true
 # zstyle ':vcs_info:git:*' formats " %r/%S %b %m%u%c "
