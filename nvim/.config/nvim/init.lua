@@ -1,17 +1,10 @@
-vim.g.mapleader = " "
-vim.g.maplocalleader = " "
+local status_ok, impatient = pcall(require, "impatient")
+if not status_ok then
+  return
+end
 
--- Options and Display settings
-require("options")
+impatient.enable_profile()
 
---Mappings
-require("mappings")
+require("dk")
 
--- Autocmds
-require("autocmds")
-
--- colors
-require("colors")
-
--- LSP settings
-require("lsp")
+require("packer_compiled")
