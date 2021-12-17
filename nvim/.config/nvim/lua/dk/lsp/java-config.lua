@@ -1,7 +1,7 @@
 local M = {}
 function M.setup()
   local jdtls = require("jdtls.setup")
-  local lsp_handler = require("lsp.handlers")
+  local lsp_handler = require("dk.lsp.handlers")
 
   local extendedClientCapabilities = require("jdtls").extendedClientCapabilities
   extendedClientCapabilities.resolveAdditionalTextEditsSupport = true
@@ -9,7 +9,7 @@ function M.setup()
   local root_markers = { "gradlew", "pom.xml", ".git" }
   local root_dir = jdtls.find_root(root_markers)
   local home = os.getenv("XDG_CACHE_HOME")
-  local workspace_folder = home .. vim.fn.fnamemodify(root_dir, ":p:h:t")
+  local workspace_folder = home .. "/jdtls-workspace/".. vim.fn.fnamemodify(root_dir, ":p:h:t")
 
   local config = {
     cmd = {

@@ -1,6 +1,6 @@
-local M = {}
+local lsp_conf = {}
 
-M.setup = function()
+lsp_conf.setup = function()
   local lsp = vim.lsp
   local handlers = lsp.handlers
 
@@ -9,7 +9,7 @@ M.setup = function()
   local max_height = math.max(math.floor(vim.o.lines * 0.3), 30)
 
   local popupOpts = {
-    border = "double",
+    border = "rounded",
     max_width = max_width,
     max_height = max_height,
   }
@@ -21,7 +21,7 @@ M.setup = function()
   vim.diagnostic.config({
     virtual_text = {
       prefix = "●",
-      source = "if_many",
+      source = "always",
     },
     float = {
       border = popupOpts.border,
@@ -56,21 +56,20 @@ local function lsp_highlight_document(client)
   end
 end
 
-local map = vim.api.nvim_buf_set_keymap
-local opts = { noremap = true, silent = true }
-local function lsp_mappings(bufnr)
-  map(bufnr, "n", "<leader>sd", ":lua vim.lsp.buf.definition()<CR>", opts)
-  map(bufnr, "n", "K", ":lua vim.lsp.buf.hover()<CR>", opts)
-  map(bufnr, "n", "<leader>sg", ":lua vim.lsp.buf.signature_help()<CR>", opts)
-  map(bufnr, "n", "<leader>se", ":lua vim.diagnostic.open_float()<CR>", opts)
-  map(bufnr, "n", "<leader>sn", ":lua vim.diagnostic.goto_next()<CR>", opts)
-  map(bufnr, "n", "<leader>sp", ":lua vim.diagnostic.goto_prev()<CR>", opts)
-  map(bufnr, "n", "<space>sf", ":lua vim.lsp.buf.formatting_seq_sync()<CR>", opts)
+local function lsp_mappings()
+  local map = require("dk.utils").buf_mappings
+  map("n", "<leader>sd", ":lua vim.lsp.buf.definition()<CR>")
+  map("n", "K", ":lua vim.lsp.buf.hover()<CR>")
+  map("n", "<leader>sg", ":lua vim.lsp.buf.signature_help()<CR>")
+  map("n", "<leader>se", ":lua vim.diagnostic.open_float()<CR>")
+  map("n", "<leader>sn", ":lua vim.diagnostic.goto_next()<CR>")
+  map("n", "<leader>sp", ":lua vim.diagnostic.goto_prev()<CR>")
+  map("n", "<space>sf", ":lua vim.lsp.buf.formatting_seq_sync()<CR>")
   -- vim.cmd([[ command! FormatIt execute 'lua vim.lsp.buf.formatting()' ]])
 end
 
-M.on_attach = function(client, bufnr)
-  lsp_mappings(bufnr)
+lsp_conf.on_attach = function(client)
+  lsp_mappings()
   lsp_highlight_document(client)
 end
 
@@ -81,6 +80,6 @@ if not status_ok then
   return
 end
 
-M.capabilities = cmp_nvim_lsp.update_capabilities(capabilities)
+lsp_conf.capabilities = cmp_nvim_lsp.update_capabilities(capabilities)
 
-return M
+return lsp_conf

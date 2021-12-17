@@ -14,12 +14,6 @@ local configs = {
   clangd = {
     cmd = { "clangd-12", "--background-index" },
   },
-  -- denols = {
-  --   init_options = {
-  --     lint = true,
-  --     config = "./deno.json",
-  --   },
-  -- },
   tsserver = {
     on_attach = function(client)
       -- disable tsserver formatting, use diagnosticls

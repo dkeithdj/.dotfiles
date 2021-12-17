@@ -8,7 +8,7 @@ if not snip_status_ok then
   return
 end
 
-require("luasnip/loaders/from_vscode").lazy_load()
+require("luasnip/loaders/from_vscode").load()
 
 local cmp_kinds = {
   Text = "",
@@ -105,7 +105,7 @@ cmp.setup({
     end, { "i", "s" }),
   },
   documentation = {
-    border = "double",
+    border = "rounded",
     maxwidth = 60,
     maxheight = 10,
   },
