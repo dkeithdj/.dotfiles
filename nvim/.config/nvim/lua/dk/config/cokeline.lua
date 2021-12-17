@@ -3,7 +3,6 @@ if not status_ok then
   return
 end
 local rq_get_hex = require("cokeline/utils").get_hex
-
 local vim_fn = vim.fn
 
 local components = {
@@ -13,7 +12,7 @@ local components = {
       priority = 1,
     },
   },
-
+  -- 2571, ▏
   separator = {
     text = function(buffer)
       return buffer.index ~= 1 and "▏" or ""
@@ -33,7 +32,7 @@ local components = {
 
   index = {
     text = function(buffer)
-      return buffer.index .. ": "
+      return buffer.index .. ":"
     end,
     hl = {
       fg = function(buffer)
@@ -126,12 +125,3 @@ cokeline.setup({
     components.space,
   },
 })
-
-local map = vim.api.nvim_set_keymap
-local opts = { silent = true }
-
-for i = 1, 9 do
-  map("n", ("<A-%s>"):format(i), ("<Plug>(cokeline-focus-%s)"):format(i), opts)
-end
-map("n", "<A-n>", "<Plug>(cokeline-focus-next)", opts)
-map("n", "<A-p>", "<Plug>(cokeline-focus-prev)", opts)

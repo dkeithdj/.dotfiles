@@ -4,9 +4,6 @@ if not status_ok then
 end
 local mappings_utils = require('renamer.mappings.utils')
 
-local map = vim.api.nvim_set_keymap
-local opts = { noremap = true, silent = true }
-
 renamer.setup {
     -- The popup title, shown if `border` is true
     title = 'Rename',
@@ -43,7 +40,3 @@ renamer.setup {
     -- the LSP 'textDocument/rename' raw response as its parameter.
     handler = true,
 }
-
--- map('i', '<F2>', ':lua require("renamer").rename()<cr>', opts)
-map('n', '<leader>rn', ':lua require("renamer").rename()<cr>', opts)
-map('v', '<leader>rn', ':lua require("renamer").rename()<cr>', opts)

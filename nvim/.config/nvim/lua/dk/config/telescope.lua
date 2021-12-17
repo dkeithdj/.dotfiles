@@ -11,7 +11,7 @@ telescope.setup({
     -- path_display = "smart",
     color_devicons = true,
 
-    borderchars = { "═", "║", "═", "║", "╔", "╗", "╝", "╚" },
+    -- borderchars = { "═", "║", "═", "║", "╔", "╗", "╝", "╚" },
     layout_config = {
       prompt_position = "bottom",
       horizontal = {
@@ -51,22 +51,3 @@ telescope.setup({
 -- load_extension, somewhere after setup function:
 telescope.load_extension("fzf")
 
--- Telescope Mappings
-local map = vim.api.nvim_set_keymap
-local opts = { noremap = true, silent = true }
-
-map("n", "<leader>tb", [[:lua require('telescope.builtin').buffers()<CR>]], opts)
-map("n", "<leader>tf", [[:lua require('telescope.builtin').find_files()<CR>]], opts)
-map("n", "<leader>t.", [[:lua require('telescope.builtin').find_files({hidden = true})<CR>]], opts)
-map("n", "<leader>ta", [[:lua require('telescope.builtin').current_buffer_fuzzy_find()<CR>]], opts)
-map("n", "<leader>th", [[:lua require('telescope.builtin').help_tags()<CR>]], opts)
-map("n", "<leader>ts", [[:lua require('telescope.builtin').grep_string()<CR>]], opts)
-map("n", "<leader>tr", [[:lua require('telescope.builtin').live_grep()<CR>]], opts)
-map("n", "<leader>tp", [[:lua require('telescope.builtin').file_browser()<CR>]], opts)
-
-map("n", "<leader>tc", [[:lua require('telescope.builtin').lsp_code_actions()<CR>]], opts)
-map("n", "<leader>tC", [[:lua require('telescope.builtin').lsp_range_code_actions()<CR>]], opts)
-map("n", "<leader>te", [[:lua require('telescope.builtin').diagnostics({bufnr = 0})<CR>]], opts)
-map("n", "<leader>tE", [[:lua require('telescope.builtin').diagnostics()<CR>]], opts)
--- map('n', '<leader>so', [[:lua require('telescope.builtin').tags{ only_current_buffer = true }<CR>]], opts)
--- map('n', '<leader>?', [[:lua require('telescope.builtin').oldfiles()<CR>]], opts)
