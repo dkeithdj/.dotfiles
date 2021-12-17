@@ -1,6 +1,6 @@
 local options = {
-  wildignore = "**/node_modules/*",
-  inccommand = "nosplit",
+  wildignore = {"node_modules", ".git"},
+  -- inccommand = "nosplit",
   mouse = "nv",
   signcolumn = "yes",
   -- clipboard = "unnamedplus",
@@ -8,9 +8,12 @@ local options = {
   tabstop = 2,
   softtabstop = 2,
   shiftwidth = 2,
-  scrolloff = 10,
+  scrolloff = 6,
   pumheight = 10,
   updatetime = 100,
+
+  termguicolors = true,
+  background = "dark",
 
   relativenumber = true,
   number = true,

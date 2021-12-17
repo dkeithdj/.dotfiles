@@ -1,4 +1,3 @@
--- Install packer
 local fn = vim.fn
 
 -- Automatically install packer
@@ -33,6 +32,13 @@ return packer.startup({
   function(use)
     use("wbthomason/packer.nvim") -- Package manager
 
+    use({
+      "lewis6991/impatient.nvim",
+      config = function()
+        require("impatient").enable_profile()
+      end,
+    })
+
     use("nvim-lua/plenary.nvim")
 
     -- DISPLAY AND THEMES
@@ -49,17 +55,18 @@ return packer.startup({
         require("dk.config.lualine")
       end,
     })
+
     -- use({
-    --   "akinsho/bufferline.nvim",
+    --   "noib3/nvim-cokeline",
     --   config = function()
-    --     require("config.bufferline")
+    --     require("dk.config.cokeline")
     --   end,
     -- })
 
     use({
-      "noib3/nvim-cokeline",
+      "akinsho/bufferline.nvim",
       config = function()
-        require("dk.config.cokeline")
+        require("dk.config.bufferline")
       end,
     })
 
@@ -69,7 +76,6 @@ return packer.startup({
         require("dk.config.comment")
       end,
     })
-    -- use("mhartington/formatter.nvim")
 
     use({
       "nvim-telescope/telescope.nvim",
@@ -102,7 +108,6 @@ return packer.startup({
         require("dk.config.treesitter")
       end,
     })
-    -- Additional textobjects for treesitter
     use("nvim-treesitter/nvim-treesitter-refactor")
     use("nvim-treesitter/nvim-treesitter-textobjects")
     use("p00f/nvim-ts-rainbow")
@@ -129,8 +134,8 @@ return packer.startup({
       config = function()
         require("dk.lsp.completion")
       end,
-    }) -- Autocompletion plugin
-    use("L3MON4D3/LuaSnip") -- Snippets plugin
+    })
+    use("L3MON4D3/LuaSnip")
     use("rafamadriz/friendly-snippets")
 
     use({
@@ -140,13 +145,6 @@ return packer.startup({
         require("dk.config.renamer")
       end,
     })
-    -- use({
-    --   "folke/trouble.nvim",
-    --   config = function()
-    --     require("dk.config.trouble")
-    --   end,
-    --   disable = true,
-    -- })
 
     use({
       "kyazdani42/nvim-tree.lua",
@@ -163,14 +161,9 @@ return packer.startup({
       event = "BufRead",
     })
 
-    use({ "lewis6991/impatient.nvim" })
-
     use("windwp/nvim-autopairs") -- auto close
     use("dstein64/vim-startuptime")
     use("tpope/vim-surround")
-
-    -- use({ "tpope/vim-rhubarb", disable = false }) -- Fugitive-companion to interact with github
-    -- use({ "tpope/vim-fugitive", disable = false }) -- Git commands in nvim
 
     -- Automatically set up configuration after cloning packer.nvim
     if PACKER_BOOTSTRAP then
@@ -181,7 +174,7 @@ return packer.startup({
     compile_path = vim.fn.stdpath("config") .. "/lua/packer_compiled.lua",
     display = {
       open_fn = function()
-        return require("packer.util").float({ border = "double" })
+        return require("packer.util").float({ border = "rounded" })
       end,
     },
   },
@@ -209,3 +202,13 @@ return packer.startup({
 -- This is just for JAVA
 -- use("RishabhRD/nvim-lsputils")
 -- use("RishabhRD/popfix")
+
+-- use({ "tpope/vim-rhubarb", disable = false }) -- Fugitive-companion to interact with github
+-- use({ "tpope/vim-fugitive", disable = false }) -- Git commands in nvim
+-- use({
+--   "folke/trouble.nvim",
+--   config = function()
+--     require("dk.config.trouble")
+--   end,
+--   disable = true,
+-- })
