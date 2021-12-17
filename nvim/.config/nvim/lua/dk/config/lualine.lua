@@ -25,10 +25,11 @@ local fileformat = {
   },
 }
 
+-- 258c, 2590, 2502
 lualine.setup({
   options = {
     theme = "auto",
-    component_separators = "|",
+    component_separators = { left = "", right = "" },
     section_separators = { left = "", right = "" },
     disabled_filetypes = { "NvimTree" },
   },
