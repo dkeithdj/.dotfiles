@@ -5,7 +5,7 @@ alias reload='source $ZDOTDIR/.zshrc'
 
 alias v=nvim
 
-alias luamake=/home/dkeith/gitRepos/lua-language-server/3rd/luamake/luamake
+alias luamake=/home/dkeith/tools/lua-language-server/3rd/luamake/luamake
 
 alias ddrive='cd /mnt/d'
 alias cdrive='cd /mnt/c/Users/DenreiK'

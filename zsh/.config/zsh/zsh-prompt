@@ -28,46 +28,56 @@ zstyle ':vcs_info:git*+set-message:*' hooks git-untracked
 }
 
 # Gruvbox Colors
-# bred='#fb4934'
-# bgreen='#b8bb26'
-# borange='#fe8019'
-# byellow='#fabd2f'
-# bblue='#83a598'
-# baqua='#8ec07c'
-# bpurple='#d3869b'
+# red='#fb4934'
+# green='#b8bb26'
+# orange='#fe8019'
+# yellow='#fabd2f'
+# blue='#83a598'
+# aqua='#8ec07c'
+# purple='#d3869b'
 # ggray='#928374'
-# flight='#fbf1c7'
+# light='#ff1c7'
 
 # NightFox Colors
-# bred="#c94f6d",
-# bgreen="#81b29a",
-# byellow="#dbc074",
-# bblue="#7daea3",
-# baqua="#63cdcf",
-# borange="#f4a261",
-# bpurple="#d67ad2",
+# red="#c94f6d",
+# green="#81b29a",
+# yellow="#dbc074",
+# blue="#7daea3",
+# aqua="#63cdcf",
+# orange="#f4a261",
+# purple="#d67ad2",
 # black="#393b44",
-# flight="#dfdfe0",
+# light="#dfdfe0",
 
 # Rose-Pine
-bred='#eb6f92',
-bgreen="#81b29a",
-byellow='#f6c177',
-bblue='#31748f',
-baqua='#9ccfd8',
-borange='#ebbcba',
-bpurple='#c4a7e7',
-black='#21202e',
-flight='#e0def4',
+# red='#eb6f92',
+# green="#81b29a",
+# yellow='#f6c177',
+# blue='#31748f',
+# aqua='#9ccfd8',
+# orange='#ebbcba',
+# purple='#c4a7e7',
+# black='#21202e',
+# light='#e0def4',
+
+
+red="#eb6f92",
+green="#9ccfd8",
+yellow="#f6c177",
+blue="#31748f",
+magenta="#c4a7e7",
+cyan="#ebbcba",
+light="#e0def4",
+black="#6e6a86",
 
 zstyle ':vcs_info:*' check-for-changes true
 # zstyle ':vcs_info:git:*' formats " %r/%S %b %m%u%c "
-zstyle ':vcs_info:git:*' formats " %F{$flight}(%F{$bred}%m%u%c%F{$byellow}%F{$bpurple} %b%F{$flight})"
+zstyle ':vcs_info:git:*' formats " %F{$light}(%F{$red}%m%u%c%F{$yellow}%F{$magenta} %b%F{$light})"
 
 # format our main prompt for hostname current folder, and permissions.
-PS1="%F{$flight}[%F{$baqua}%n%F{$flight}] %(?:%F{$bgreen}➜ :%F{$bred}➜ )%F{$bblue}%c%F{$reset_color}"
+PS1="%F{$cyan}[%F{$red}%n%F{$cyan}] %(?:%F{$green}➜ :%F{$red}➜ )%F{$cyan}%c%F{$reset_color}"
 
 # PS1="%{$fg[blue]%}[%{$fg[white]%}%n%{$fg[red]%}@%{$fg[white]%}%m%{$fg[blue]%}] %(?:%{$fg_bold[green]%}➜ :%{$fg_bold[red]%}➜ )%{$fg[cyan]%}%c%{$reset_color%}"
 # PROMPT="%{$fg[green]%}%n@%m %~ %{$reset_color%}%#> "
 PS1+="\$vcs_info_msg_0_"
-PS1+="%F{$flight} "
+PS1+="%F{$light} "

@@ -82,7 +82,7 @@ lfcd () {
         [ -d "$dir" ] && [ "$dir" != "$(pwd)" ] && cd "$dir"
     fi
 }
-bindkey -s '^o' 'lfcd^M'
+# bindkey -s '^o' 'lfcd^M'
 # Environment variables set everywhere
 export EDITOR="nvim"
 
