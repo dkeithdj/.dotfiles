@@ -6,6 +6,7 @@ end
 configs.setup({
   highlight = {
     enable = true, -- false will disable the whole extension
+    ensure_installed = "maintained",
     additional_vim_regex_highlighting = true,
     disable = {},
   },
@@ -16,9 +17,6 @@ configs.setup({
     -- colors = {}, -- table of hex strings
     -- termcolors = {} -- table of colour name strings
   },
-  autotag = {
-    enable = true,
-  },
   incremental_selection = {
     enable = true,
     keymaps = {
@@ -28,12 +26,33 @@ configs.setup({
       node_decremental = "<A-C-w>",
     },
   },
+  autotag = {
+    enable = true,
+  },
   context_commentstring = {
     enable = true,
     enable_autocmd = false,
   },
   indent = {
     enable = true,
+  },
+  refactor = {
+    highlight_definitions = { enable = true },
+    -- highlight_current_scope = { enable = true },
+    smart_rename = {
+      enable = false,
+      keymaps = {
+        smart_rename = "<A-r>",
+      },
+    },
+    navigation = {
+      enable = true,
+      keymaps = {
+        -- list_definitions = "gnD",
+        goto_next_usage = "<A-n>",
+        goto_previous_usage = "<A-p>",
+      },
+    },
   },
   textobjects = {
     select = {

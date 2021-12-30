@@ -2,6 +2,7 @@ local status_ok, lualine = pcall(require, "lualine")
 if not status_ok then
   return
 end
+local DS = require("dk.utils").icons.diagnostic_signs
 
 local filename = {
   "filename",
@@ -12,7 +13,7 @@ local filename = {
 local diagnostics = {
   "diagnostics",
   sources = { "nvim_diagnostic" },
-  symbols = { error = " ", warn = " ", info = " ", hint = " " },
+  symbols = { error = DS.error .. " ", warn = DS.warn .. " ", info = DS.info .. " ", hint = DS.hint .. " " },
   colored = true,
 }
 

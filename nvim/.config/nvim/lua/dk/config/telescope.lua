@@ -37,6 +37,9 @@ telescope.setup({
     },
   },
   pickers = {
+    current_buffer_fuzzy_find = {
+      preview = false,
+    },
     lsp_code_actions = { theme = "cursor" },
   },
   extensions = {
@@ -50,4 +53,4 @@ telescope.setup({
 })
 -- load_extension, somewhere after setup function:
 telescope.load_extension("fzf")
-
+telescope.load_extension("notify")
