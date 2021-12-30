@@ -1,214 +1,213 @@
-local fn = vim.fn
+vim.cmd([[packadd packer.nvim]])
 
--- Automatically install packer
-local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
-if fn.empty(fn.glob(install_path)) > 0 then
-  PACKER_BOOTSTRAP = fn.system({
-    "git",
-    "clone",
-    "--depth",
-    "1",
-    "https://github.com/wbthomason/packer.nvim",
-    install_path,
-  })
-  print("Installing packer close and reopen Neovim...")
+local present, packer = pcall(require, "dk.packerInit")
+
+if present then
+  packer = require("packer")
+else
+  return false
 end
 
 -- Autocommand that reloads neovim whenever you save the plugins.lua file
 vim.cmd([[
   augroup packer_user_config
     autocmd!
-    autocmd BufWritePost plugins.lua source <afile> | PackerCompile
+    autocmd BufWritePost plugins.lua source <afile> | PackerCompile profile=true
   augroup end
 ]])
 
--- Use a protected call so we don't error out on first use
-local status_ok, packer = pcall(require, "packer")
-if not status_ok then
-  return
-end
+local use = packer.use
 
-return packer.startup({
-  function(use)
-    use("wbthomason/packer.nvim") -- Package manager
+return packer.startup(function()
+  use({ "wbthomason/packer.nvim", opt = true }) -- Package manager
 
+  local config = function(name)
+    return string.format("require('dk.config.%s')", name)
+  end
+
+  local use_with_conf = function(repo, name)
     use({
-      "lewis6991/impatient.nvim",
-      config = function()
-        require("impatient").enable_profile()
-      end,
+      repo,
+      -- config = function()
+      config = config(name),
+      -- end,
     })
+  end
 
-    use("nvim-lua/plenary.nvim")
+  -- Optimizations
+  use({ "lewis6991/impatient.nvim" })
+  use({ "nathom/filetype.nvim" })
 
-    -- DISPLAY AND THEMES
-    use("rose-pine/neovim")
-    use({
-      "kyazdani42/nvim-web-devicons",
-      config = function()
-        require("nvim-web-devicons").setup()
-      end,
-    })
-    use({
-      "nvim-lualine/lualine.nvim",
-      config = function()
-        require("dk.config.lualine")
-      end,
-    })
+  -- Used by alotta plugins
+  use({ "nvim-lua/plenary.nvim" })
 
-    -- use({
-    --   "noib3/nvim-cokeline",
-    --   config = function()
-    --     require("dk.config.cokeline")
-    --   end,
-    -- })
+  -- DISPLAY AND THEMES
+  use({ "rose-pine/neovim" })
 
-    use({
-      "akinsho/bufferline.nvim",
-      config = function()
-        require("dk.config.bufferline")
-      end,
-    })
+  use({
+    "kyazdani42/nvim-web-devicons",
+    config = function()
+      require("nvim-web-devicons").setup()
+    end,
+  })
 
-    use({
-      "numToStr/Comment.nvim",
-      config = function()
-        require("dk.config.comment")
-      end,
-    })
+  use_with_conf("kyazdani42/nvim-tree.lua", "nvim-tree")
 
-    use({
-      "nvim-telescope/telescope.nvim",
-      config = function()
-        require("dk.config.telescope")
-      end,
-    })
-    use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" })
+  use_with_conf("rcarriga/nvim-notify", "notify")
 
-    -- Add indentation guides even on blank lines
-    use({
-      "lukas-reineke/indent-blankline.nvim",
-      config = function()
-        require("dk.config.blankline")
-      end,
-    })
-    -- Add git related info in the signs columns and popups
-    use({
-      "lewis6991/gitsigns.nvim",
-      config = function()
-        require("dk.config.gitsigns")
-      end,
-    })
+  use({
+    "nvim-lualine/lualine.nvim",
+    event = "BufEnter",
+    config = config("lualine"),
+  })
 
-    -- TREESITTER
-    use({
-      "nvim-treesitter/nvim-treesitter",
-      run = ":TSUpdate",
-      config = function()
-        require("dk.config.treesitter")
-      end,
-    })
-    use("nvim-treesitter/nvim-treesitter-refactor")
-    use("nvim-treesitter/nvim-treesitter-textobjects")
-    use("p00f/nvim-ts-rainbow")
-    use("nvim-treesitter/playground")
-    use("windwp/nvim-ts-autotag")
-    use("JoosepAlviste/nvim-ts-context-commentstring")
+  use({
+    "akinsho/bufferline.nvim",
+    config = config("bufferline"),
+    event = "BufEnter",
+    disable = false,
+  })
 
-    -- LSP
-    use({ "neovim/nvim-lspconfig", config = "require('dk.lsp')" })
-    use("jose-elias-alvarez/null-ls.nvim")
-    use("mfussenegger/nvim-jdtls")
+  -- comments
+  use({
+    "numToStr/Comment.nvim",
+    config = config("comment"),
+    event = "BufRead",
+  })
 
-    use({
-      "hrsh7th/nvim-cmp",
-      requires = {
-        "hrsh7th/cmp-nvim-lsp",
-        "hrsh7th/cmp-nvim-lua",
-        "saadparwaiz1/cmp_luasnip",
-        "hrsh7th/cmp-buffer",
-        "hrsh7th/cmp-path",
-        "ray-x/cmp-treesitter",
-        "lukas-reineke/cmp-under-comparator",
-      },
-      config = function()
-        require("dk.lsp.completion")
-      end,
-    })
-    use("L3MON4D3/LuaSnip")
-    use("rafamadriz/friendly-snippets")
+  use({
+    "nvim-telescope/telescope.nvim",
+    cmd = "Telescope",
+    config = config("telescope"),
+  })
+  use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" })
 
-    use({
-      "filipdutescu/renamer.nvim",
-      branch = "master",
-      config = function()
-        require("dk.config.renamer")
-      end,
-    })
+  -- Add indentation guides even on blank lines
+  use({
+    "lukas-reineke/indent-blankline.nvim",
+    event = "BufRead",
+    config = config("blankline"),
+  })
+  -- Add git related info in the signs columns and popups
+  use({
+    "lewis6991/gitsigns.nvim",
+    event = "BufRead",
+    config = config("gitsigns"),
+  })
+  -- TREESITTER
+  use({
+    "nvim-treesitter/nvim-treesitter",
+    run = ":TSUpdate",
+    event = "BufEnter",
+    config = config("treesitter"),
+  })
+  use({ "nvim-treesitter/nvim-treesitter-refactor", after = "nvim-treesitter" })
+  use({ "nvim-treesitter/nvim-treesitter-textobjects", after = "nvim-treesitter" })
+  use({ "p00f/nvim-ts-rainbow", after = "nvim-treesitter" })
+  use({ "nvim-treesitter/playground", after = "nvim-treesitter" })
+  use({ "windwp/nvim-ts-autotag", after = "nvim-treesitter" })
+  use({ "JoosepAlviste/nvim-ts-context-commentstring", after = "nvim-treesitter" })
 
-    use({
-      "kyazdani42/nvim-tree.lua",
-      config = function()
-        require("dk.config.nvim-tree")
-      end,
-    })
+  -- LSP
+  use({ "williamboman/nvim-lsp-installer" })
+  use({
+    "neovim/nvim-lspconfig",
+    event = "BufRead",
+    config = config("lsp"),
+  })
+  use({
+    "jose-elias-alvarez/null-ls.nvim",
+  })
+  use({ "mfussenegger/nvim-jdtls", ft = "java" })
 
-    use({
-      "norcalli/nvim-colorizer.lua",
-      config = function()
-        require("colorizer").setup()
-      end,
-      event = "BufRead",
-    })
-
-    use("windwp/nvim-autopairs") -- auto close
-    use("dstein64/vim-startuptime")
-    use("tpope/vim-surround")
-
-    -- Automatically set up configuration after cloning packer.nvim
-    if PACKER_BOOTSTRAP then
-      require("packer").sync()
-    end
-  end,
-  config = {
-    compile_path = vim.fn.stdpath("config") .. "/lua/packer_compiled.lua",
-    display = {
-      open_fn = function()
-        return require("packer.util").float({ border = "rounded" })
-      end,
+  use({
+    "hrsh7th/nvim-cmp",
+    requires = {
+      "hrsh7th/cmp-nvim-lsp",
+      "saadparwaiz1/cmp_luasnip",
+      "hrsh7th/cmp-buffer",
+      "hrsh7th/cmp-path",
+      "ray-x/cmp-treesitter",
+      "lukas-reineke/cmp-under-comparator",
+      "hrsh7th/cmp-emoji",
+      "hrsh7th/cmp-nvim-lsp-signature-help",
     },
-  },
-})
+    config = config("lsp.completion"),
+  })
+  use({ "L3MON4D3/LuaSnip" })
+  use({ "rafamadriz/friendly-snippets" })
+
+  use({
+    "folke/trouble.nvim",
+    config = config("trouble"),
+    cmd = "Trouble",
+    disable = false,
+  })
+
+  use({
+    "filipdutescu/renamer.nvim",
+    branch = "master",
+    event = "InsertEnter",
+    config = config("renamer"),
+  })
+
+  use({
+    "norcalli/nvim-colorizer.lua",
+    config = function()
+      require("colorizer").setup()
+    end,
+    cmd = "ColorizerToggle",
+  })
+
+  use({
+    "windwp/nvim-autopairs",
+    event = "CursorHold",
+    config = function()
+      require("nvim-autopairs").setup()
+      local cmp_autopairs = require("nvim-autopairs.completion.cmp")
+      require("cmp").event:on("confirm_done", cmp_autopairs.on_confirm_done({ map_char = { tex = "" } }))
+    end,
+  }) -- auto close
+
+  use({
+    "dstein64/vim-startuptime",
+    config = function()
+      vim.g.startuptime_tries = 10
+    end,
+    cmd = "StartupTime",
+  })
+  use({ "tpope/vim-surround", event = "CursorHold" })
+end)
 -- unused -----------------------
 
--- use("williamboman/nvim-lsp-installer")
--- use 'stevearc/dressing.nvim'
--- use 'MunifTanjim/nui.nvim'
+-- use({ "williamboman/nvim-lsp-installer" })
+-- use({ "stevearc/dressing.nvim" })
+-- use({ "MunifTanjim/nui.nvim" })
 
--- use("sainnhe/gruvbox-material")
--- use("EdenEast/nightfox.nvim")
--- use("eddyekofo94/gruvbox-flat.nvim")
--- use 'folke/tokyonight.nvim'
--- use 'marko-cerovac/material.nvim'
--- use 'catppuccin/nvim'
+-- use({ "sainnhe/gruvbox-material" })
+-- use({ "EdenEast/nightfox.nvim" })
+-- use({ "eddyekofo94/gruvbox-flat.nvim" })
+-- use({ "folke/tokyonight.nvim" })
+-- use({ "marko-cerovac/material.nvim" })
+-- use({ "catppuccin/nvim" })
 
--- use 'tami5/lspsaga.nvim'
--- use 'kosayoda/nvim-lightbulb'
--- use("ray-x/lsp_signature.nvim")
--- use "b0o/schemastore.nvim"
+-- use({ "tami5/lspsaga.nvim" })
+-- use({ "kosayoda/nvim-lightbulb" })
+-- use({ "ray-x/lsp_signature.nvim" })
+-- use({ "b0o/schemastore.nvim" })
 
--- use {'weilbith/nvim-code-action-menu', cmd = 'CodeActionMenu',}
+-- use({ "weilbith/nvim-code-action-menu", cmd = "CodeActionMenu" })
 
 -- This is just for JAVA
--- use("RishabhRD/nvim-lsputils")
--- use("RishabhRD/popfix")
+-- use({ "RishabhRD/nvim-lsputils" })
+-- use({ "RishabhRD/popfix" })
 
 -- use({ "tpope/vim-rhubarb", disable = false }) -- Fugitive-companion to interact with github
 -- use({ "tpope/vim-fugitive", disable = false }) -- Git commands in nvim
 -- use({
---   "folke/trouble.nvim",
+--   "noib3/nvim-cokeline",
 --   config = function()
---     require("dk.config.trouble")
+--     require("dk.config.cokeline")
 --   end,
 --   disable = true,
 -- })

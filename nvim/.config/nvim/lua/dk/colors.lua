@@ -1,10 +1,5 @@
--- vim.g.gruvbox_flat_style = "hard"
--- vim.g.gruvbox_transparent = true
+local colorscheme = "rose-pine"
 
--- vim.cmd[[
---   colorscheme gruvbox-flat
--- ]]
--- rose-pine
 vim.g.rose_pine_variant = "main"
 
 vim.g.rose_pine_bold_vertical_split_line = false
@@ -24,7 +19,21 @@ vim.g.rose_pine_colors = {
 }
 
 -- Set colorscheme after options
-vim.cmd("colorscheme rose-pine")
+local status_ok, _ = pcall(vim.cmd, "colorscheme " .. colorscheme)
+if not status_ok then
+  vim.notify("Colorscheme " .. colorscheme .. " not found\n going to defaults")
+  return vim.cmd([[colorscheme default]])
+end
+
+-- vim.cmd[[highlight VisualNOS guibg=NONE]]
+-- vim.cmd[[highlight Visual gui=reverse]]
+
+vim.cmd([[highlight CursorLine guibg=#222130]])
+vim.cmd([[highlight IncSearch gui=reverse]])
+vim.cmd([[highlight PMenu guibg=NONE]])
+vim.cmd([[highlight NormalFloat guibg=NONE]])
+
+-- UNUSED
 
 -- nightfox
 -- local nightfox = require('nightfox')
@@ -48,9 +57,3 @@ vim.cmd("colorscheme rose-pine")
 -- })
 
 -- nightfox.load()
--- vim.cmd[[highlight VisualNOS guibg=NONE]]
--- vim.cmd[[highlight Visual gui=reverse]]
-vim.cmd([[highlight CursorLine guibg=#222130]])
-vim.cmd([[highlight IncSearch gui=reverse]])
-vim.cmd([[highlight PMenu guibg=NONE]])
-vim.cmd([[highlight NormalFloat guibg=NONE]])
