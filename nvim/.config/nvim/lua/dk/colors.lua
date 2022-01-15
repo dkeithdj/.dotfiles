@@ -1,23 +1,20 @@
-local colorscheme = "rose-pine"
+local colorscheme = "tokyonight"
 
-vim.g.rose_pine_variant = "main"
-
-vim.g.rose_pine_bold_vertical_split_line = false
-vim.g.rose_pine_inactive_background = false
-vim.g.rose_pine_disable_background = true
-vim.g.rose_pine_disable_float_background = true
-vim.g.rose_pine_disable_italics = true
-
-local p = require("rose-pine.palette")
-vim.g.rose_pine_colors = {
-  punctuation = p.subtle,
-  comment = p.subtle,
-  hint = p.iris,
-  info = p.foam,
-  warn = p.gold,
-  error = p.love,
+vim.g.tokyonight_style = "storm"
+vim.g.tokyonight_transparent = false
+vim.g.tokyonight_dark_sidebar = true
+vim.g.tokyonight_dark_float = true
+vim.g.tokyonight_hide_inactive_statusline = true
+vim.g.tokyonight_sidebars = {
+  "qf",
+  "vista_kind",
+  "terminal",
+  "packer",
+  "help",
+  "Trouble",
+  -- "Telescope",
+  -- "LspInfo",
 }
-
 -- Set colorscheme after options
 local status_ok, _ = pcall(vim.cmd, "colorscheme " .. colorscheme)
 if not status_ok then
@@ -25,19 +22,17 @@ if not status_ok then
   return vim.cmd([[colorscheme default]])
 end
 
--- vim.cmd[[highlight VisualNOS guibg=NONE]]
--- vim.cmd[[highlight Visual gui=reverse]]
-
-vim.cmd([[highlight CursorLine guibg=#222130]])
-vim.cmd([[highlight IncSearch gui=reverse]])
-vim.cmd([[highlight PMenu guibg=NONE]])
-vim.cmd([[highlight NormalFloat guibg=NONE]])
-
 -- UNUSED
+
+-- vim.g.rose_pine_variant = "main"
+-- vim.g.rose_pine_bold_vertical_split_line = false
+-- vim.g.rose_pine_inactive_background = false
+-- vim.g.rose_pine_disable_background = true
+-- vim.g.rose_pine_disable_float_background = true
+-- vim.g.rose_pine_disable_italics = true
 
 -- nightfox
 -- local nightfox = require('nightfox')
-
 -- nightfox.setup({
 --   fox = 'duskfox',
 --   transparent = true,
@@ -55,5 +50,4 @@ vim.cmd([[highlight NormalFloat guibg=NONE]])
 --     -- PMenu = {bg = "NONE"},
 --   }
 -- })
-
 -- nightfox.load()
