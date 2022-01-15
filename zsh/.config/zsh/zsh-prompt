@@ -4,10 +4,10 @@
 autoload -Uz vcs_info
 autoload -U colors && colors
 
-# enable only git 
-zstyle ':vcs_info:*' enable git 
+# enable only git
+zstyle ':vcs_info:*' enable git
 
-# setup a hook that runs before every ptompt. 
+# setup a hook that runs before every ptompt.
 precmd_vcs_info() { vcs_info }
 precmd_functions+=( precmd_vcs_info )
 setopt prompt_subst
@@ -15,7 +15,7 @@ setopt prompt_subst
 # add a function to check for untracked files in the directory.
 # from https://github.com/zsh-users/zsh/blob/master/Misc/vcs_info-examples
 zstyle ':vcs_info:git*+set-message:*' hooks git-untracked
-# 
+#
 +vi-git-untracked(){
     if [[ $(git rev-parse --is-inside-work-tree 2> /dev/null) == 'true' ]] && \
         git status --porcelain | grep '??' &> /dev/null ; then
@@ -50,29 +50,28 @@ zstyle ':vcs_info:git*+set-message:*' hooks git-untracked
 # light="#dfdfe0",
 
 # Rose-Pine
-# red='#eb6f92',
-# green="#81b29a",
-# yellow='#f6c177',
-# blue='#31748f',
-# aqua='#9ccfd8',
-# orange='#ebbcba',
-# purple='#c4a7e7',
-# black='#21202e',
-# light='#e0def4',
+# red="#eb6f92",
+# green="#9ccfd8",
+# yellow="#f6c177",
+# blue="#31748f",
+# purple="#c4a7e7",
+# cyan="#ebbcba",
+# light="#e0def4",
+# black="#6e6a86",
 
-
-red="#eb6f92",
-green="#9ccfd8",
-yellow="#f6c177",
-blue="#31748f",
-magenta="#c4a7e7",
-cyan="#ebbcba",
-light="#e0def4",
-black="#6e6a86",
+# Tokyonight
+black='#1D202F',
+red='#f7768e',
+green='#9ece6a',
+yellow='#e0af68',
+blue='#7aa2f7',
+purple='#bb9af7',
+cyan='#7dcfff',
+light='#a9b1d6',
 
 zstyle ':vcs_info:*' check-for-changes true
 # zstyle ':vcs_info:git:*' formats " %r/%S %b %m%u%c "
-zstyle ':vcs_info:git:*' formats " %F{$light}(%F{$red}%m%u%c%F{$yellow}%F{$magenta} %b%F{$light})"
+zstyle ':vcs_info:git:*' formats "%F{$light}(%F{$red}%m%u%c%F{$yellow}%F{$purple} %b%F{$light})"
 
 # format our main prompt for hostname current folder, and permissions.
 PS1="%F{$cyan}[%F{$red}%n%F{$cyan}] %(?:%F{$green}➜ :%F{$red}➜ )%F{$cyan}%c%F{$reset_color}"

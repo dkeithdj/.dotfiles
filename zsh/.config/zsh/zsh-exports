@@ -17,5 +17,8 @@ export PATH="$HOME/tools/llvm-project/build/bin:$PATH"
 export LD_LIBRARY_PATH="$HOME/tools/llvm-project/build/lib:$LD_LIBRARY_PATH"
 export DOTFILES="$HOME/.dotfiles"
 
+# export CC="clang"
+# export CFLAGS="-ggdb3 -O0 -std=c11 -Wall -Werror -Wextra -Wno-sign-compare -Wno-unused-parameter -Wno-unused-variable -Wshadow"
+# export LDLIBS="-lcrypt -lcs50 -lm"
 
 . "$HOME/.cargo/env"
