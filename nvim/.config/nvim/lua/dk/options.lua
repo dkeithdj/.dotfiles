@@ -53,9 +53,10 @@ for k, v in pairs(options) do
   vim.opt[k] = v
 end
 -- Do not source the default filetype.vim
-vim.g.did_load_filetypes = 1
+vim.g.did_load_filetypes = 0
+vim.g.do_filetype_lua = 1
 
-vim.opt.shortmess:append("c")
+vim.opt.shortmess:append("cs")
 
 -- DISABLED
 local disabled_built_ins = {
@@ -88,3 +89,10 @@ vim.g.loaded_python_provider = 0
 vim.g.loaded_python3_provider = 0
 vim.g.loaded_ruby_provider = 0
 vim.g.loaded_perl_provider = 0
+
+vim.cmd([[
+  augroup YankHighlight
+    autocmd!
+    autocmd TextYankPost * silent! lua vim.highlight.on_yank({timeout=150})
+  augroup end
+]])

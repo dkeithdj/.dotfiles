@@ -1,3 +1,7 @@
+D = function(...)
+  vim.notify(vim.inspect(...))
+end
+
 local M = {}
 
 M.icons = {
@@ -37,19 +41,16 @@ M.icons = {
 }
 
 function M.mappings(mode, lhs, rhs, opts)
-  local options = { noremap = true, silent = true }
-  if opts then
-    options = vim.tbl_extend("force", options, opts)
-  end
-  vim.api.nvim_set_keymap(mode, lhs, rhs, options)
+  local options = opts or {}
+  vim.keymap.set(mode, lhs, rhs, options)
 end
 
 function M.buf_mappings(bufnr, mode, lhs, rhs, opts)
-  local options = { noremap = true, silent = true }
+  local options = { buffer = bufnr }
   if opts then
-    options = vim.tbl_extend("force", options, opts)
+    options = vim.tbl_extend("keep", options, opts)
   end
-  vim.api.nvim_buf_set_keymap(bufnr, mode, lhs, rhs, options)
+  vim.keymap.set(mode, lhs, rhs, options)
 end
 
 function M.warn(msg, name)

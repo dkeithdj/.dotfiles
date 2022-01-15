@@ -12,7 +12,7 @@ end
 vim.cmd([[
   augroup packer_user_config
     autocmd!
-    autocmd BufWritePost plugins.lua source <afile> | PackerCompile profile=true
+    autocmd BufWritePost plugins.lua source <afile> | PackerCompile
   augroup end
 ]])
 
@@ -39,10 +39,16 @@ return packer.startup(function()
   use({ "nathom/filetype.nvim" })
 
   -- Used by alotta plugins
-  use({ "nvim-lua/plenary.nvim" })
+  use({ "nvim-lua/plenary.nvim", module = "plenary" })
 
   -- DISPLAY AND THEMES
-  use({ "rose-pine/neovim" })
+  use({
+    -- "rose-pine/neovim",
+    "folke/tokyonight.nvim",
+    config = function()
+      require("dk.colors")
+    end,
+  })
 
   use({
     "kyazdani42/nvim-web-devicons",
@@ -59,14 +65,23 @@ return packer.startup(function()
     "nvim-lualine/lualine.nvim",
     event = "BufEnter",
     config = config("lualine"),
+    disable = false,
+  })
+  use({
+    "rebelot/heirline.nvim",
+    event = "BufEnter",
+    config = config("heirline"),
+    disable = true,
   })
 
   use({
     "akinsho/bufferline.nvim",
     config = config("bufferline"),
-    event = "BufEnter",
+    event = "BufReadPre",
     disable = false,
   })
+
+  use({ "kazhala/close-buffers.nvim", cmd = "BDelete" })
 
   -- comments
   use({
@@ -77,10 +92,17 @@ return packer.startup(function()
 
   use({
     "nvim-telescope/telescope.nvim",
-    cmd = "Telescope",
     config = config("telescope"),
+    cmd = "Telescope",
+    wants = {
+      "plenary.nvim",
+      "telescope-fzf-native.nvim",
+    },
+    requires = {
+      { "nvim-lua/plenary.nvim" },
+      { "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
+    },
   })
-  use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" })
 
   -- Add indentation guides even on blank lines
   use({
@@ -91,57 +113,82 @@ return packer.startup(function()
   -- Add git related info in the signs columns and popups
   use({
     "lewis6991/gitsigns.nvim",
-    event = "BufRead",
+    event = "BufReadPre",
     config = config("gitsigns"),
   })
+
   -- TREESITTER
   use({
     "nvim-treesitter/nvim-treesitter",
     run = ":TSUpdate",
-    event = "BufEnter",
+    opt = true,
+    event = "BufRead",
     config = config("treesitter"),
+    requires = {
+      { "nvim-treesitter/playground", opt = true, cmd = "TSHighlightCaptureUnderCursor" },
+      "nvim-treesitter/nvim-treesitter-refactor",
+      "nvim-treesitter/nvim-treesitter-textobjects",
+      "RRethy/nvim-treesitter-textsubjects",
+      "p00f/nvim-ts-rainbow",
+      "windwp/nvim-ts-autotag",
+      "JoosepAlviste/nvim-ts-context-commentstring",
+    },
   })
-  use({ "nvim-treesitter/nvim-treesitter-refactor", after = "nvim-treesitter" })
-  use({ "nvim-treesitter/nvim-treesitter-textobjects", after = "nvim-treesitter" })
-  use({ "p00f/nvim-ts-rainbow", after = "nvim-treesitter" })
-  use({ "nvim-treesitter/playground", after = "nvim-treesitter" })
-  use({ "windwp/nvim-ts-autotag", after = "nvim-treesitter" })
-  use({ "JoosepAlviste/nvim-ts-context-commentstring", after = "nvim-treesitter" })
 
   -- LSP
-  use({ "williamboman/nvim-lsp-installer" })
   use({
     "neovim/nvim-lspconfig",
-    event = "BufRead",
+    opt = true,
+    event = "BufReadPre",
+    wants = {
+      "nvim-lsp-installer",
+      "null-ls.nvim",
+    },
     config = config("lsp"),
+    requires = {
+      "williamboman/nvim-lsp-installer",
+      "jose-elias-alvarez/null-ls.nvim",
+      "jose-elias-alvarez/nvim-lsp-ts-utils",
+    },
   })
-  use({
-    "jose-elias-alvarez/null-ls.nvim",
-  })
+
   use({ "mfussenegger/nvim-jdtls", ft = "java" })
 
   use({
     "hrsh7th/nvim-cmp",
+    event = "CursorHold",
+    opt = true,
+    config = config("lsp.completion"),
+    wants = { "LuaSnip" },
     requires = {
       "hrsh7th/cmp-nvim-lsp",
-      "saadparwaiz1/cmp_luasnip",
       "hrsh7th/cmp-buffer",
       "hrsh7th/cmp-path",
       "ray-x/cmp-treesitter",
-      "lukas-reineke/cmp-under-comparator",
       "hrsh7th/cmp-emoji",
       "hrsh7th/cmp-nvim-lsp-signature-help",
+      "saadparwaiz1/cmp_luasnip",
+      {
+        "L3MON4D3/LuaSnip",
+        wants = "friendly-snippets",
+      },
+      {
+        module = "nvim-autopairs",
+        "windwp/nvim-autopairs",
+        config = function()
+          require("nvim-autopairs").setup()
+        end,
+      },
+      "rafamadriz/friendly-snippets",
     },
-    config = config("lsp.completion"),
   })
-  use({ "L3MON4D3/LuaSnip" })
-  use({ "rafamadriz/friendly-snippets" })
 
   use({
     "folke/trouble.nvim",
+    event = "BufReadPre",
     config = config("trouble"),
     cmd = "Trouble",
-    disable = false,
+    disable = true,
   })
 
   use({
@@ -152,22 +199,18 @@ return packer.startup(function()
   })
 
   use({
-    "norcalli/nvim-colorizer.lua",
-    config = function()
-      require("colorizer").setup()
-    end,
-    cmd = "ColorizerToggle",
+    "akinsho/nvim-toggleterm.lua",
+    keys = "<M-`>",
+    config = config("terminal"),
   })
 
   use({
-    "windwp/nvim-autopairs",
-    event = "CursorHold",
+    "norcalli/nvim-colorizer.lua",
+    event = "BufReadPre",
     config = function()
-      require("nvim-autopairs").setup()
-      local cmp_autopairs = require("nvim-autopairs.completion.cmp")
-      require("cmp").event:on("confirm_done", cmp_autopairs.on_confirm_done({ map_char = { tex = "" } }))
+      require("colorizer").setup()
     end,
-  }) -- auto close
+  })
 
   use({
     "dstein64/vim-startuptime",
@@ -176,18 +219,23 @@ return packer.startup(function()
     end,
     cmd = "StartupTime",
   })
-  use({ "tpope/vim-surround", event = "CursorHold" })
+
+  use({ "tpope/vim-surround", event = "BufReadPre", requires = { "tpope/vim-repeat" } })
+  -- use({ "tpope/vim-repeat", event = "BufReadPre" })
+  use({ "mbbill/undotree", cmd = "UndotreeToggle" })
+  use({
+    "ggandor/lightspeed.nvim",
+    config = config("lightspeed"),
+  })
 end)
 -- unused -----------------------
 
--- use({ "williamboman/nvim-lsp-installer" })
 -- use({ "stevearc/dressing.nvim" })
 -- use({ "MunifTanjim/nui.nvim" })
 
 -- use({ "sainnhe/gruvbox-material" })
 -- use({ "EdenEast/nightfox.nvim" })
 -- use({ "eddyekofo94/gruvbox-flat.nvim" })
--- use({ "folke/tokyonight.nvim" })
 -- use({ "marko-cerovac/material.nvim" })
 -- use({ "catppuccin/nvim" })
 
