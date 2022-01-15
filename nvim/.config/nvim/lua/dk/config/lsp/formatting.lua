@@ -1,10 +1,6 @@
 local util = require("dk.utils")
 local M = {}
 
--- vim.lsp.handlers["textDocument/hover"] = function(_, method, result)
---   print(vim.inspect(result))
--- end
-
 M.autoformat = true
 
 function M.toggle()

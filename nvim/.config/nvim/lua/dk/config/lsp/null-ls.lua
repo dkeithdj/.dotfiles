@@ -14,19 +14,22 @@ local nls_sources = {
   fmt.trim_whitespace.with({
     filetypes = { "text", "sh", "zsh", "toml", "make", "conf", "tmux" },
   }),
-
   fmt.stylua,
-  -- dcs.luacheck.with({
-  --   extra_args = { "--globals", "vim", "--std", "luajit" },
-  -- }),
-
   fmt.prettierd,
+  -- fmt.eslint_d,
+
+  dcs.luacheck.with({
+    extra_args = { "--globals", "vim", "--std", "luajit" },
+  }),
   dcs.eslint_d,
+  dcs.shellcheck,
+
+  -- ca.eslint_d,
 }
 
 function M.setup(options)
   nls.setup({
-    debounce = 150,
+    debounce = 200,
     sources = nls_sources,
     on_attach = options.on_attach,
   })

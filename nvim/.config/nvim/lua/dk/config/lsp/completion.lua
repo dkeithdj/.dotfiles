@@ -2,7 +2,7 @@ local cmp_status_ok, cmp = pcall(require, "cmp")
 
 local snip_status_ok, luasnip = pcall(require, "luasnip")
 if not (cmp_status_ok or snip_status_ok) then
-  return
+  vim.notify(cmp)
 end
 
 require("luasnip/loaders/from_vscode").load()
@@ -34,18 +34,6 @@ cmp.setup({
       })[entry.source.name]
       return vim_item
     end,
-  },
-  sorting = {
-    comparators = {
-      cmp.config.compare.offset,
-      cmp.config.compare.exact,
-      cmp.config.compare.score,
-      require("cmp-under-comparator").under,
-      cmp.config.compare.kind,
-      cmp.config.compare.sort_text,
-      cmp.config.compare.length,
-      cmp.config.compare.order,
-    },
   },
   snippet = {
     expand = function(args)
@@ -100,8 +88,7 @@ cmp.setup({
   },
 })
 
--- local cmp_autopairs = require("nvim-autopairs.completion.cmp")
--- cmp.event:on(
---   "confirm_done",
---   cmp_autopairs.on_confirm_done({ map_char = { tex = "" } })
--- )
+local cmp_autopairs = require("nvim-autopairs.completion.cmp")
+cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done({ map_char = { tex = "" } }))
+
+vim.cmd([[highlight! CmpDocumentationBorder guibg=NONE]])

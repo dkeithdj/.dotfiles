@@ -47,15 +47,21 @@ function L.setup()
   })
 end
 
+local tel = require("dk.config.telescope")
+
 function L.lsp_mappings(bufnr)
   local map = require("dk.utils").buf_mappings
-  map(bufnr, "n", "<leader>sd", ":lua vim.lsp.buf.definition()<CR>")
-  map(bufnr, "n", "K", ":lua vim.lsp.buf.hover()<CR>")
-  map(bufnr, "n", "<leader>sg", ":lua vim.lsp.buf.signature_help()<CR>")
-  map(bufnr, "n", "<leader>se", ":lua vim.diagnostic.open_float()<CR>")
-  map(bufnr, "n", "<leader>sn", ":lua vim.diagnostic.goto_next()<CR>")
-  map(bufnr, "n", "<leader>sp", ":lua vim.diagnostic.goto_prev()<CR>")
-  -- map(bufnr, "n", "<space>sf", ":lua vim.lsp.buf.formatting_seq_sync()<CR>")
+  map(bufnr, "n", "K", vim.lsp.buf.hover)
+  map(bufnr, "n", "<leader>sg", vim.lsp.buf.signature_help)
+  map(bufnr, "n", "<A-e>", vim.diagnostic.open_float)
+  map(bufnr, "n", "<A-n>", vim.diagnostic.goto_next)
+  map(bufnr, "n", "<A-p>", vim.diagnostic.goto_prev)
+
+  map(bufnr, "n", "<A-d>", tel.lsp_definitions)
+  map(bufnr, "n", "<leader>te", [[<cmd>Telescope diagnostics bufnr=0<CR>]])
+  map(bufnr, "n", "<leader>tE", [[<cmd>Telescope diagnostics<CR>]])
+  map(bufnr, "n", "<leader>tc", tel.lsp_code_actions)
+  -- map("n", "<space>sf", vim.lsp.buf.formatting_seq_sync)
   -- vim.cmd([[ command! Format execute 'lua vim.lsp.buf.formatting()' ]])
 end
 
@@ -65,18 +71,14 @@ function L.fmt_on_save(client)
   end
 end
 
-function L.on_attach(client, bufnr)
-  L.lsp_mappings(bufnr)
+function L.on_attach(client)
+  L.lsp_mappings()
   L.fmt_on_save(client)
 end
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 
-local status_ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
-if not status_ok then
-  return
-end
-
+local cmp_nvim_lsp = require("cmp_nvim_lsp")
 L.capabilities = cmp_nvim_lsp.update_capabilities(capabilities)
 
 ---Make luajit runtime files discoverable to the server
@@ -86,32 +88,5 @@ function L.get_luajit_path()
   table.insert(luajit_path, "lua/?/init.lua")
   return luajit_path
 end
-
--- local null_ls_found
--- local use_null_ls = "null-ls"
--- local null_ls = require("null-ls")
--- local nls_info = require("null-ls.info")
--- function L.check_formatter()
---   for _, client in ipairs(vim.lsp.get_active_clients()) do
---     if client.name == use_null_ls then
---       null_ls_found = true
---       print("it here")
---     end
---   end
-
---   local nls_sources = {}
---   for _, name in ipairs(null_ls.get_sources()) do
---     table.insert(nls_sources, name.name)
---   end
-
---   if null_ls_found then
---     print("checking")
---     for _, value in pairs(nls_info.get_active_sources()) do
---       if vim.tbl_contains(nls_sources, value.name) then
---         print("yep")
---       end
---     end
---   end
--- end
 
 return L
