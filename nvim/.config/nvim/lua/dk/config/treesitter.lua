@@ -18,11 +18,11 @@ configs.setup({
     -- termcolors = {} -- table of colour name strings
   },
   incremental_selection = {
-    enable = true,
+    enable = false,
     keymaps = {
       init_selection = "<A-w>",
       node_incremental = "<A-w>",
-      scope_incremental = "<A-e>",
+      scope_incremental = "<A-y>",
       node_decremental = "<A-C-w>",
     },
   },
@@ -35,6 +35,14 @@ configs.setup({
   },
   indent = {
     enable = true,
+  },
+  textsubjects = {
+    enable = true,
+    prev_selection = ",", -- (Optional) keymap to select the previous selection
+    keymaps = {
+      ["."] = "textsubjects-smart",
+      [";"] = "textsubjects-container-outer",
+    },
   },
   refactor = {
     highlight_definitions = { enable = true },
@@ -49,8 +57,8 @@ configs.setup({
       enable = true,
       keymaps = {
         -- list_definitions = "gnD",
-        goto_next_usage = "<A-n>",
-        goto_previous_usage = "<A-p>",
+        goto_next_usage = "<A-j>",
+        goto_previous_usage = "<A-k>",
       },
     },
   },

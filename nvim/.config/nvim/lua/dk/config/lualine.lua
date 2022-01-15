@@ -4,6 +4,34 @@ if not status_ok then
 end
 local DS = require("dk.utils").icons.diagnostic_signs
 
+local function lsp_progress(_, is_active)
+  if not is_active then
+    return
+  end
+  local messages = vim.lsp.util.get_progress_messages()
+  if #messages == 0 then
+    return ""
+  end
+  -- dump(messages)
+  local status = {}
+  for _, msg in pairs(messages) do
+    local title = ""
+    if msg.title then
+      title = msg.title
+    end
+    -- if msg.message then
+    --   title = title .. " " .. msg.message
+    -- end
+    table.insert(status, (msg.percentage or 0) .. "%% " .. title)
+  end
+  local spinners = { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏" }
+  local ms = vim.loop.hrtime() / 1000000
+  local frame = math.floor(ms / 120) % #spinners
+  return table.concat(status, "") .. " " .. spinners[frame + 1]
+end
+
+vim.cmd("au User LspProgressUpdate let &ro = &ro")
+
 local filename = {
   "filename",
   file_status = true, -- displays file status (readonly status, modified status)
@@ -38,17 +66,17 @@ lualine.setup({
     lualine_a = { "mode" },
     lualine_b = { "branch", filename },
     lualine_c = { diagnostics },
-    lualine_x = { fileformat, "encoding", "filetype" },
+    lualine_x = { lsp_progress, fileformat, "encoding", "filetype" },
     lualine_y = { "progress" },
     lualine_z = { "location" },
   },
   inactive_sections = {
     lualine_a = {},
     lualine_b = {},
-    lualine_c = { "filename" },
-    lualine_x = { "location" },
+    lualine_c = {},
+    lualine_x = {},
     lualine_y = {},
     lualine_z = {},
   },
-  -- extensions = { "fugitive" },
+  -- extensions = { "nvim-tree" },
 })

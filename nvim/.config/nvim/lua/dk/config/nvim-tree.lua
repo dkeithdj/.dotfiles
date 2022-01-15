@@ -2,13 +2,12 @@ local status_ok, nvim_tree = pcall(require, "nvim-tree")
 if not status_ok then
   return
 end
-local vim = vim
 
 vim.g.nvim_tree_root_folder_modifier = table.concat({ ":t:gs?$?/..", string.rep(" ", 1000), "?:gs?^??" })
-vim.g.nvim_tree_window_picker_exclude = {
-  filetype = { "notify", "packer", "qf" },
-  buftype = { "terminal" },
-}
+-- vim.g.nvim_tree_window_picker_exclude = {
+--   filetype = { "notify", "packer", "qf" },
+--   buftype = { "terminal" },
+-- }
 vim.g.nvim_tree_quit_on_open = 1
 vim.g.nvim_tree_indent_markers = 1
 
@@ -23,8 +22,12 @@ nvim_tree.setup({
   -- update_to_buf_dir = { enable = true, auto_open = true },
   view = {
     width = 30,
+    height = 30,
+    hide_root_folder = false,
+    side = "left",
+    auto_resize = true,
   },
-  update_focused_file = { enable = true },
+  -- update_focused_file = { enable = true },
   diagnostics = {
     enable = false,
     icons = {
@@ -37,6 +40,8 @@ nvim_tree.setup({
   git = {
     enable = false,
   },
+  -- git_hl = 0,
+  -- disable_window_picker = 0,
 })
 
-vim.cmd([[autocmd ColorScheme * highlight NvimTreeNormal guibg=none]])
+-- vim.cmd([[autocmd ColorScheme * highlight NvimTreeNormal guibg=none]])
