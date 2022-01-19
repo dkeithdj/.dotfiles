@@ -1,4 +1,4 @@
-JAR="$XDG_DATA_HOME/nvim/lsp_servers/jdtls/plugins/org.eclipse.equinox.launcher_*.jar"
+JAR="$HOME/.local/share/jdtls-server/plugins/org.eclipse.equinox.launcher_*.jar"
 GRADLE_HOME=$XDG_CACHE_HOME/gradle $JAVA_HOME/bin/java \
   -Declipse.application=org.eclipse.jdt.ls.core.id1 \
   -Dosgi.bundles.defaultStartLevel=4 \
@@ -8,7 +8,7 @@ GRADLE_HOME=$XDG_CACHE_HOME/gradle $JAVA_HOME/bin/java \
   -Xms1g \
   -Xmx2G \
   -jar $(echo "$JAR") \
-  -configuration "$XDG_DATA_HOME/nvim/lsp_servers/jdtls/config_linux" \
+  -configuration "$HOME/.local/share/jdtls-server/config_linux" \
   -data "$1" \
   --add-modules=ALL-SYSTEM \
   --add-opens java.base/java.util=ALL-UNNAMED \
