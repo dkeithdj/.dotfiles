@@ -10,7 +10,9 @@ alias luamake=/home/dkeith/tools/lua-language-server/3rd/luamake/luamake
 alias ddrive='cd /mnt/d'
 alias cdrive='cd /mnt/c/Users/DenreiK'
 
-alias python='python3.8'
+# alias python='python3.8'
+# alias python='python.exe'
+# alias pip='pip'
 alias clangd='clangd-12'
 
 # Colorize grep output (good for log files)
@@ -38,4 +40,3 @@ alias \
 # easier to read disk
 alias df='df -h'     # human-readable sizes
 alias free='free -m' # show sizes in MB
-
