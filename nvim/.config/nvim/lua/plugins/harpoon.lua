@@ -4,6 +4,7 @@ return {
     "nvim-lua/plenary.nvim",
   },
   vscode = false,
+  enabled = false,
   opt = true,
   config = function()
     local mark = require("harpoon.mark")
