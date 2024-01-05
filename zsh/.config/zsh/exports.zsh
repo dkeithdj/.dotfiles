@@ -12,8 +12,8 @@ export LESSHISTFILE="-"
 export ZDOTDIR=$HOME/.config/zsh
 
 export EDITOR="nvim"
-export TERMINAL="konsole"
-export BROWSER="brave"
+export TERMINAL="kitty"
+export BROWSER="firefox"
 export PATH="$HOME/.local/bin":$PATH
 export MANPAGER='nvim +Man!'
 export MANWIDTH=999
@@ -26,7 +26,11 @@ export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || pr
 export PATH="$HOME/.local/share/solana/install/active_release/bin:$PATH"
 export PATH="$HOME/.avm/bin:$PATH"
 export PATH="$HOME/flutter/bin:$PATH"
-export CHROME_EXECUTABLE="brave-browser"
+export CHROME_EXECUTABLE="brave"
 export PATH=$PATH:/usr/local/go/bin
 export PATH=$PATH:$HOME/go/bin
 export PATH="$PATH":"$HOME/.pub-cache/bin"
+export JAVA_HOME='/usr/lib/jvm/java-8-openjdk'
+export PATH=$JAVA_HOME/bin:$PATH 
+
+export MOZ_ENABLE_WAYLAND=1
