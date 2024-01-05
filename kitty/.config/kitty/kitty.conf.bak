@@ -2458,11 +2458,7 @@ font_size 12.0
 #: }}}
 
 
-map f1 new_tab_with_cwd
-map kitty_mod+enter new_window_with_cwd
-map kitty_mod+n new_os_window_with_cwd
-map kitty_mod+t     new_tab_with_cwd
 # BEGIN_KITTY_THEME
-# Tokyo Night
+# Gruvbox Dark Hard
 include current-theme.conf
 # END_KITTY_THEME
