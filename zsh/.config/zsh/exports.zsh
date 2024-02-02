@@ -13,7 +13,7 @@ export ZDOTDIR=$HOME/.config/zsh
 
 export EDITOR="nvim"
 export TERMINAL="kitty"
-export BROWSER="firefox"
+export BROWSER="brave-browser-stable"
 export PATH="$HOME/.local/bin":$PATH
 export MANPAGER='nvim +Man!'
 export MANWIDTH=999
@@ -26,7 +26,7 @@ export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || pr
 export PATH="$HOME/.local/share/solana/install/active_release/bin:$PATH"
 export PATH="$HOME/.avm/bin:$PATH"
 export PATH="$HOME/flutter/bin:$PATH"
-export CHROME_EXECUTABLE="brave"
+export CHROME_EXECUTABLE="brave-browser-stable"
 export PATH=$PATH:/usr/local/go/bin
 export PATH=$PATH:$HOME/go/bin
 export PATH="$PATH":"$HOME/.pub-cache/bin"
@@ -35,5 +35,6 @@ export PATH=$JAVA_HOME/bin:$PATH
 
 export MOZ_ENABLE_WAYLAND=1
 
-export DOTNET_ROOT=$HOME/dotnet
-export PATH=$PATH:$HOME/dotnet
+export DOTNET_ROOT=$HOME/.dotnet
+export PATH=$PATH:$HOME/.dotnet
+export PATH="$PATH:$DOTNET_ROOT/tools"

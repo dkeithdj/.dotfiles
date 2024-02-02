@@ -24,6 +24,8 @@ plug "zsh-users/zsh-syntax-highlighting"
 
 plug "esc/conda-zsh-completion"
 
+setopt share_history
+
 bindkey -s '^f' 'tmux-sessionizer\r'
 
 bindkey "^p" up-line-or-beginning-search # Up

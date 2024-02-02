@@ -8,9 +8,6 @@ alias v=nvim
 
 alias luamake=/home/dkeith/tools/lua-language-server/3rd/luamake/luamake
 
-alias ddrive='cd /mnt/d'
-alias cdrive='cd /mnt/c/Users/DenreiK'
-
 # alias python='python3.8'
 # alias python='python.exe'
 # alias pip='pip'
@@ -21,7 +18,7 @@ alias \
   grep='grep --color=auto' \
   egrep='egrep --color=auto' \
   fgrep='fgrep --color=auto' \
-  ls="ls -hN --color=auto --group-directories-first"
+ls='ls always'
 
 # confirm before overwriting something
 alias \
