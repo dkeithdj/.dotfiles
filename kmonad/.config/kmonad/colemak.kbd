@@ -1,0 +1,64 @@
+(defcfg
+  input  (device-file "/dev/input/by-path/platform-i8042-serio-0-event-kbd")
+  output (uinput-sink "KMonad kbd")
+  fallthrough true
+)
+
+;; QWERTY to COLEMAK-DH
+(defsrc
+  esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12  
+  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc      
+  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \         
+  caps a    s    d    f    g    h    j    k    l    ;    '    ret            
+  lsft z    x    c    v    b    n    m    ,    .    /    rsft               
+  lctl lmet lalt           spc            ralt      rctl
+)
+
+(deflayer colemak
+  esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12  
+  grv  1    2    3    4    5    6    7    8    9    0    -    =    \            
+  tab  q    w    f    p    b    [    j    l    u    y    ;    '    bspc         
+  lctl a    r    s    t    g    ]    m    n    e    i    o    ret               
+  lsft x    c    d    v    z    /    k    h    ,    .    @mo2                   
+  caps lmet lalt           spc            @mo1       rctl
+)
+
+(deflayer numlayer
+  _    _    _    _    _    _    _    _    _    _    _    _    _    
+  _    _    _    _    _    _    _    _    _    _    _    _    _    _
+  _    -    1    2    3    +    _    _    _    _    _    _    _    _
+  _    [    4    5    6    ]    _    _   left down up   rght _
+  _    7    8    9    0    grv  _    /    \    _    _   _
+  _    _    _              _              _         _
+)
+
+(deflayer symlayer
+  _    _    _    _    _    _    _    _    _    _    _    _    _    
+  _    _    _    _    _    _    _    _    _    _    _    _    _    _
+  _    @_   @!   @@   @#   =    _    _    _    _    _    _    _    _
+  _    @{   @$   @%  @^   @}   _    _    _    _    _    _    _
+  _    @&   @*   @op @cp  @til _    @?  @pipe _   _   _
+  _    _    _              _              _         _
+)
+
+(defalias
+  mo1 (layer-toggle numlayer)
+  mo2 (layer-toggle symlayer)
+  ;; shifted keys
+  _ S--
+  ! S-1
+  @ S-2
+  # S-3
+  { S-[
+  $ S-4
+  % S-5
+  ^ S-6
+  } S-]
+  & S-7
+  * S-8
+  op S-9
+  cp S-0
+  til S-grv
+  ? S-/
+  pipe S-\
+)
