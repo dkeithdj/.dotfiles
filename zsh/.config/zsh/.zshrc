@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 [ -f "$HOME/.local/share/zap/zap.zsh" ] && source "$HOME/.local/share/zap/zap.zsh"
 
 # history
@@ -26,7 +26,8 @@ plug "esc/conda-zsh-completion"
 
 setopt share_history
 
-bindkey -s '^f' 'tmux-sessionizer\r'
+# bindkey -s '^f' 'tmux-sessionizer\r'
+bindkey -s '^f' '. cd-project\r'
 
 bindkey "^p" up-line-or-beginning-search # Up
 bindkey "^n" down-line-or-beginning-search # Down
