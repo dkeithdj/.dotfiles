@@ -3,3 +3,5 @@ nvim/.config/nvim/lua/packer_compiled.lua
 .zsh_history
 .zcompdump
 lazygit/.config/lazygit/state.yml
+nvim/.config/nvim/.git
+nvim/.config/nvim/.github
