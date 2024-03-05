@@ -5,6 +5,7 @@ alias reload='source $ZDOTDIR/.zshrc'
 
 alias nvimrc='nvim ~/.config/nvim/'
 alias v=nvim
+alias nv=neovide
 
 alias luamake=/home/dkeith/tools/lua-language-server/3rd/luamake/luamake
 

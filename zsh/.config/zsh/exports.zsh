@@ -38,3 +38,4 @@ export MOZ_ENABLE_WAYLAND=1
 export DOTNET_ROOT=$HOME/.dotnet
 export PATH=$PATH:$HOME/.dotnet
 export PATH="$PATH:$DOTNET_ROOT/tools"
+export WINE_MASM_DIR=$HOME/wine-masm
