@@ -40,6 +40,14 @@ export PATH="$HOME/.local/bin":$PATH
 
 # eval "$(starship init zsh)"
 
+# pipx
+autoload -U bashcompinit
+bashcompinit
+eval "$(register-python-argcomplete pipx)"
+
+fpath+=~/.zfunc
+autoload -Uz compinit && compinit
+
 # pnpm
 export PNPM_HOME="/home/denrei/.local/share/pnpm"
 case ":$PATH:" in
@@ -48,3 +56,4 @@ case ":$PATH:" in
 esac
 # pnpm end
 #
+
