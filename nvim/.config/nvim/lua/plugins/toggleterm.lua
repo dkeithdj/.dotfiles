@@ -16,35 +16,35 @@ return {
       function()
         require("toggleterm").toggle(1, 0, Util.root.get(), "horizontal")
       end,
-      desc = "Terminal 1",
+      desc = "Horizontal Terminal",
     },
     {
       "<leader>2",
       function()
         require("toggleterm").toggle(2, 0, Util.root.get(), "float")
       end,
-      desc = "Terminal 2",
+      desc = "Floating Terminal 2",
     },
     {
       "<leader>3",
       function()
         require("toggleterm").toggle(3, 0, Util.root.get(), "float")
       end,
-      desc = "Terminal 3",
+      desc = "Floating Terminal 3",
     },
     {
       "<leader>4",
       function()
         require("toggleterm").toggle(4, 0, Util.root.get(), "float")
       end,
-      desc = "Terminal 4",
+      desc = "Floating Terminal 4",
     },
     {
       "<leader>5",
       function()
         require("toggleterm").toggle(5, 0, Util.root.get(), "float")
       end,
-      desc = "Terminal 5",
+      desc = "Floating Terminal 5",
     },
     {
       "<leader>Tn",
