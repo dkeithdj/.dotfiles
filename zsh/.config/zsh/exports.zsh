@@ -11,7 +11,9 @@ export LESSHISTFILE="-"
 
 export ZDOTDIR=$HOME/.config/zsh
 
+export DOTFILES=$HOME/.dotfiles
 export EDITOR="nvim"
+export VISUAL="nvim"
 export TERMINAL="kitty"
 export BROWSER="brave-browser-stable"
 export PATH="$HOME/.local/bin":$PATH

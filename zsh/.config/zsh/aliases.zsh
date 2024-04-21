@@ -35,9 +35,10 @@ alias \
   cfz='cd $ZDOTDIR && $EDITOR .zshrc' \
   cft='cd $HOME && $EDITOR .tmux.conf' \
   cdf='cd $DOTFILES' \
-  cfr='fd --type d . --hidden --exclude .git --exclude .vscode --exclude node_modules | fzf  --prompt=' Choose Dir: ' --layout=reverse --border=sharp --exit-0' \
+  cfr='fd --type d . --hidden --exclude .git --exclude .vscode --exclude node_modules --exclude venv | fzf  --prompt=' Choose Dir: ' --layout=reverse --border=sharp --exit-0' \
 
 # easier to read disk
 alias df='df -h'     # human-readable sizes
 alias free='free -m' # show sizes in MB
 
+alias ve=". setvenv"

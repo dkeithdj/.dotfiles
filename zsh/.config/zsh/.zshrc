@@ -39,6 +39,9 @@ bindkey -r "^d"
 
 export PATH="$HOME/.local/bin":$PATH
 
+export VISUAL=nvim
+export EDITOR=nvim
+
 # eval "$(starship init zsh)"
 
 # pipx
