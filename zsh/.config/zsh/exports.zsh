@@ -26,7 +26,7 @@ export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || pr
 export PATH="$HOME/.local/share/solana/install/active_release/bin:$PATH"
 export PATH="$HOME/.avm/bin:$PATH"
 export PATH="$HOME/flutter/bin:$PATH"
-export CHROME_EXECUTABLE="brave-browser-stable"
+export CHROME_EXECUTABLE="brave"
 export PATH=$PATH:/usr/local/go/bin
 export PATH=$PATH:$HOME/go/bin
 export PATH="$PATH":"$HOME/.pub-cache/bin"
@@ -39,3 +39,6 @@ export DOTNET_ROOT=$HOME/.dotnet
 export PATH=$PATH:$HOME/.dotnet
 export PATH="$PATH:$DOTNET_ROOT/tools"
 export WINE_MASM_DIR=$HOME/wine-masm
+
+export BUN_INSTALL="$HOME/.bun" 
+export PATH="$BUN_INSTALL/bin:$PATH"

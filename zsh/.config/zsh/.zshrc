@@ -19,9 +19,10 @@ plug "zap-zsh/vim"
 plug "zap-zsh/zap-prompt"
 # plug "wintermi/zsh-starship"
 plug "zap-zsh/fzf"
+plug "Aloxaf/fzf-tab"
 plug "zap-zsh/exa"
 plug "zsh-users/zsh-syntax-highlighting"
-
+plug "MichaelAquilina/zsh-you-should-use"
 plug "esc/conda-zsh-completion"
 
 setopt share_history
@@ -57,3 +58,6 @@ esac
 # pnpm end
 #
 
+
+# bun completions
+[ -s "/home/denrei/.bun/_bun" ] && source "/home/denrei/.bun/_bun"
