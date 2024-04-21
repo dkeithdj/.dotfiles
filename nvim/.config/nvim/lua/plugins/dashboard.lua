@@ -1,5 +1,6 @@
 return {
   "nvimdev/dashboard-nvim",
+  enabled = not vim.env.KITTY_SCROLLBACK_NVIM,
   event = "VimEnter",
   opts = function()
     local logo = [[
