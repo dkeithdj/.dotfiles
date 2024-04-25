@@ -1,0 +1,13 @@
+[Unit]
+Description=Colemak keyboard kmonad
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=kmonad $HOME/.config/kmonad/colemak.kbd
+Restart=always
+User=root
+Group=root
+
+[Install]
+WantedBy=multi-user.target
