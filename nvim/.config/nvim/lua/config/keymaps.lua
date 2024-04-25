@@ -4,7 +4,7 @@
 -- paste from outside vim
 
 local map = vim.keymap.set
-
+vim.keymap.del("t", "<C-l>")
 map("v", "<leader>p", '"_dP<CR>', {
   noremap = true,
   silent = true,
