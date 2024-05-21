@@ -13,21 +13,12 @@ return {
         local icon = require("lazyvim.config").icons.kinds.Copilot
         return icon
       end,
-      -- cond = function()
-      --   if vim.g.copilot_enabled == nil then
-      --     return false
-      --   end
-      --   return true
-      -- end,
-      -- cond = function()
-      --   if vim.g.copilot_enabled ~= nil then
-      --     return false
-      --   end
-      --   return true
-      -- end,
+      cond = function()
+        return #vim.lsp.get_clients({ bufnr = 0, name = "GitHub Copilot" }) > 0 or false
+      end,
       color = function()
-        local status = (vim.g.copilot_enabled or 1) == 1
-        if status then
+        local status = vim.g.copilot_enabled
+        if not status then
           return colors["Warning"]
         end
         return colors[""]
