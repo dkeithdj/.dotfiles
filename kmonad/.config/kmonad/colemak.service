@@ -4,7 +4,7 @@ After=network.target
 
 [Service]
 Type=simple
-ExecStart=kmonad $HOME/.config/kmonad/colemak.kbd
+ExecStart=kmonad /usr/local/bin/colemak.kbd
 Restart=always
 User=root
 Group=root
