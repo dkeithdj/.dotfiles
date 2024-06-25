@@ -27,7 +27,13 @@ alias \
 	mv="mv -iv" \
 	rm="rm -vI" \
 	bc="bc -ql" \
-	mkd="mkdir -pv"
+	mkd="mkdir -pv" \
+
+if [[ $(command -v bat) ]]; then
+  alias cat="bat"
+else
+  alias cat="cat"
+fi
 
 # go edit file
 alias \
